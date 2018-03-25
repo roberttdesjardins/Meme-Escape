@@ -91,7 +91,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case 2:
             obstacle2()
         case 3:
-            print("Obstacle 3")
+            obstacle3()
+        case 4:
+            print("Obstacle 4")
+        case 5:
+            print("Obstacle 5")
+        case 6:
+            print("Obstacle 6")
         default:
             print("Default Obstacle")
         }
@@ -171,9 +177,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         obs.run(repeatRotation)
         
         let actionWait = SKAction.wait(forDuration: 5)
-        let actionMoveDone = SKAction.removeFromParent()
-        obs.run(SKAction.sequence([actionWait, actionMoveDone]))
+        let actionWaitDone = SKAction.removeFromParent()
+        obs.run(SKAction.sequence([actionWait, actionWaitDone]))
     }
+    
+    func obstacle3() {
+        createWarningArea(width: size.width/10, height: size.height, position: CGPoint(x: size.width * (1/6), y: size.height/2), duration: 5.0)
+        createWarningArea(width: size.width/10, height: size.height, position: CGPoint(x: size.width * (3/6), y: size.height/2), duration: 5.0)
+        createWarningArea(width: size.width/10, height: size.height, position: CGPoint(x: size.width * (5/6), y: size.height/2), duration: 5.0)
+    }
+    
+    func createWarningArea(width: CGFloat, height: CGFloat, position: CGPoint, duration: TimeInterval) {
+        let warning = SKSpriteNode(imageNamed: "warning")
+        warning.size = CGSize(width: width, height: height)
+        warning.position = position
+        worldNode.addChild(warning)
+        
+        let actionWait = SKAction.wait(forDuration: duration)
+        let actionWaitDone = SKAction.removeFromParent()
+        warning.run(SKAction.sequence([actionWait, actionWaitDone]))
+    }
+    
     
     func touchDown(atPoint pos : CGPoint) {
         if let player = worldNode.childNode(withName: kPlayerName) as? Player {
