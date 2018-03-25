@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		559D5CC1206723A20088B5FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559D5CC0206723A20088B5FC /* AppDelegate.swift */; };
-		559D5CC3206723A20088B5FC /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 559D5CC2206723A20088B5FC /* GameScene.sks */; };
-		559D5CC5206723A20088B5FC /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 559D5CC4206723A20088B5FC /* Actions.sks */; };
 		559D5CC7206723A20088B5FC /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559D5CC6206723A20088B5FC /* GameScene.swift */; };
 		559D5CC9206723A20088B5FC /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559D5CC8206723A20088B5FC /* GameViewController.swift */; };
 		559D5CCC206723A20088B5FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 559D5CCA206723A20088B5FC /* Main.storyboard */; };
@@ -17,6 +15,9 @@
 		559D5CD1206723A20088B5FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 559D5CCF206723A20088B5FC /* LaunchScreen.storyboard */; };
 		559D5CDC206723A20088B5FC /* SlingshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559D5CDB206723A20088B5FC /* SlingshotTests.swift */; };
 		559D5CE7206723A20088B5FC /* SlingshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559D5CE6206723A20088B5FC /* SlingshotUITests.swift */; };
+		559D5CF7206745A60088B5FC /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559D5CF6206745A60088B5FC /* Player.swift */; };
+		559D5CF9206749040088B5FC /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559D5CF8206749040088B5FC /* GameOverScene.swift */; };
+		559D5CFB206749590088B5FC /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559D5CFA206749590088B5FC /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +40,6 @@
 /* Begin PBXFileReference section */
 		559D5CBD206723A20088B5FC /* Slingshot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Slingshot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		559D5CC0206723A20088B5FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		559D5CC2206723A20088B5FC /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		559D5CC4206723A20088B5FC /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		559D5CC6206723A20088B5FC /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		559D5CC8206723A20088B5FC /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		559D5CCB206723A20088B5FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -53,6 +52,9 @@
 		559D5CE2206723A20088B5FC /* SlingshotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlingshotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		559D5CE6206723A20088B5FC /* SlingshotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlingshotUITests.swift; sourceTree = "<group>"; };
 		559D5CE8206723A20088B5FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		559D5CF6206745A60088B5FC /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		559D5CF8206749040088B5FC /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		559D5CFA206749590088B5FC /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,14 +106,15 @@
 			isa = PBXGroup;
 			children = (
 				559D5CC0206723A20088B5FC /* AppDelegate.swift */,
-				559D5CC2206723A20088B5FC /* GameScene.sks */,
-				559D5CC4206723A20088B5FC /* Actions.sks */,
 				559D5CC6206723A20088B5FC /* GameScene.swift */,
 				559D5CC8206723A20088B5FC /* GameViewController.swift */,
 				559D5CCA206723A20088B5FC /* Main.storyboard */,
 				559D5CCD206723A20088B5FC /* Assets.xcassets */,
 				559D5CCF206723A20088B5FC /* LaunchScreen.storyboard */,
 				559D5CD2206723A20088B5FC /* Info.plist */,
+				559D5CF6206745A60088B5FC /* Player.swift */,
+				559D5CF8206749040088B5FC /* GameOverScene.swift */,
+				559D5CFA206749590088B5FC /* Helpers.swift */,
 			);
 			path = Slingshot;
 			sourceTree = "<group>";
@@ -242,10 +245,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				559D5CCC206723A20088B5FC /* Main.storyboard in Resources */,
-				559D5CC3206723A20088B5FC /* GameScene.sks in Resources */,
 				559D5CCE206723A20088B5FC /* Assets.xcassets in Resources */,
 				559D5CD1206723A20088B5FC /* LaunchScreen.storyboard in Resources */,
-				559D5CC5206723A20088B5FC /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,8 +271,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				559D5CF7206745A60088B5FC /* Player.swift in Sources */,
+				559D5CFB206749590088B5FC /* Helpers.swift in Sources */,
 				559D5CC7206723A20088B5FC /* GameScene.swift in Sources */,
 				559D5CC9206723A20088B5FC /* GameViewController.swift in Sources */,
+				559D5CF9206749040088B5FC /* GameOverScene.swift in Sources */,
 				559D5CC1206723A20088B5FC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
