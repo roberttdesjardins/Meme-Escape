@@ -11,9 +11,17 @@ import GameplayKit
 import AVFoundation
 
 
+public extension CGFloat {
+    /// Randomly returns either 1.0 or -1.0.
+    public static var randomSign: CGFloat {
+        return (arc4random_uniform(2) == 0) ? 1.0 : -1.0
+    }
+}
+
 struct PhysicsCategory {
     static let None: UInt32 = 0
     static let Player: UInt32 = 0x1 << 1
+    static let Obstacle: UInt32 = 0x1 << 2
     
     static let Edge: UInt32 = 0x1 << 25
     static let All: UInt32 = UInt32.max
@@ -28,6 +36,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var counter: Int = 0
     
     private var kPlayerName = "playerName"
+    private var kObstacleName = "obstacleName"
     
     
     override func sceneDidLoad() {
@@ -37,7 +46,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createScreen()
         createPlayer()
         setUpTouchScreenToStartLabel()
-        
+        self.physicsWorld.gravity = CGVector(dx: 0.0, dy: -2.0)
     }
     
     func createScreen() {
@@ -78,9 +87,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func randomObstacle(obsticle: Int) {
         switch obsticle {
         case 1:
-            print("Obstacle 1")
+            obstacle1()
         case 2:
-            print("Obstacle 2")
+            obstacle2()
         case 3:
             print("Obstacle 3")
         default:
@@ -88,6 +97,83 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    func obstacle1() {
+        worldNode.run(SKAction.repeat(SKAction.sequence([
+            SKAction.run {
+                self.addWall()
+            },
+            SKAction.wait(forDuration: TimeInterval(random(min: 0.5, max: 1.0)))]), count: 5))
+    }
+    
+    func addWall() {
+        let obs = SKSpriteNode(imageNamed: "white_pixel")
+        obs.name = kObstacleName
+        obs.size = CGSize(width: 30, height: size.height * (1/2))
+        obs.position = CGPoint(x: size.width + obs.size.width/2, y: random(min: obs.size.height/2, max: size.height - obs.size.height/2))
+        obs.zPosition = 1
+        
+        obs.physicsBody = SKPhysicsBody(rectangleOf: obs.size)
+        obs.physicsBody?.isDynamic = false
+        obs.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
+        obs.physicsBody?.contactTestBitMask = PhysicsCategory.Player
+        obs.physicsBody?.collisionBitMask = PhysicsCategory.None
+        worldNode.addChild(obs)
+        
+        let actualDuration = random(min: CGFloat(2.0), max: CGFloat(3.0))
+        let actionMove = SKAction.move(to: CGPoint(x: -obs.size.width/2, y: obs.position.y), duration: TimeInterval(actualDuration))
+        let actionMoveDone = SKAction.removeFromParent()
+        obs.run(SKAction.sequence([actionMove, actionMoveDone]))
+    }
+    
+    func obstacle2() {
+        let timeDuration = TimeInterval(3.0)
+        let actionWednesdaySound = SKAction.run {
+            self.playSoundFile(soundFile: "wednesday", duration: timeDuration)
+        }
+        let actionWait = SKAction.wait(forDuration: timeDuration)
+        let actionMyDudesSound = SKAction.run {
+            self.playSoundFile(soundFile: "myDudes", duration: 5.0)
+        }
+        let actionRunFrogs = SKAction.repeat(SKAction.sequence([SKAction.run {self.addWednesday()},SKAction.wait(forDuration: TimeInterval(random(min: 0.1, max: 0.2)))]), count: 25)
+        
+        worldNode.run(SKAction.sequence([
+            actionWednesdaySound,
+            actionWait,
+            actionMyDudesSound,
+            actionRunFrogs
+            ]))
+    }
+    
+    func addWednesday() {
+        let obs = SKSpriteNode(imageNamed: "myDudes")
+        obs.name = kObstacleName
+        obs.size = CGSize(width: 65, height: 65)
+        obs.position = CGPoint(x: size.width/2, y: -obs.size.height/2)
+        obs.zPosition = 2
+        obs.zRotation = random(min: 0, max: 6.28319)
+        
+        obs.physicsBody = SKPhysicsBody(texture: obs.texture!, size: obs.size)
+        obs.physicsBody?.isDynamic = true
+        obs.physicsBody?.affectedByGravity = true
+        obs.physicsBody?.allowsRotation = true
+        obs.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
+        obs.physicsBody?.contactTestBitMask = PhysicsCategory.Player
+        obs.physicsBody?.collisionBitMask = PhysicsCategory.None
+        worldNode.addChild(obs)
+        
+        let randomDX = random(min: -250, max: 250)
+        let randomDY = random(min: 450, max: 650)
+        obs.physicsBody?.applyForce(CGVector(dx: randomDX, dy: randomDY))
+        
+        let oneRevolution:SKAction = SKAction.rotate(byAngle: CGFloat.pi * 2 * CGFloat.randomSign, duration: TimeInterval(random(min: 0.5, max: 3.0)))
+        let repeatRotation:SKAction = SKAction.repeatForever(oneRevolution)
+        
+        obs.run(repeatRotation)
+        
+        let actionWait = SKAction.wait(forDuration: 5)
+        let actionMoveDone = SKAction.removeFromParent()
+        obs.run(SKAction.sequence([actionWait, actionMoveDone]))
+    }
     
     func touchDown(atPoint pos : CGPoint) {
         if let player = worldNode.childNode(withName: kPlayerName) as? Player {
@@ -134,6 +220,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
+    // Called when there is a collision between two nodes.
+    func collisionBetween(ob1: SKNode, ob2: SKNode){
+        if ob1.name == kPlayerName && ob2.name == kObstacleName {
+            gameOverSceneLoad(view: view!)
+        }
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        guard let nodeA = contact.bodyA.node else { return }
+        guard let nodeB = contact.bodyB.node else { return }
+        if nodeA.name == kPlayerName {
+            collisionBetween(ob1: nodeA, ob2: nodeB)
+        } else if nodeB.name == kPlayerName {
+            collisionBetween(ob1: nodeB, ob2: nodeA)
+        }
+    }
+    
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         if startGame {
@@ -146,9 +249,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Calculate time since last update
         let dt = currentTime - self.lastUpdateTime
         
-        if startGame && CGFloat(dt) >= random(min: 2, max: 5) {
+        if startGame && CGFloat(dt) >= random(min: 4, max: 5) {
             self.lastUpdateTime = currentTime
             randomObstacle(obsticle: Int(arc4random_uniform(3) + 1))
         }
     }
+
+    func playSoundFile(soundFile: String, duration: TimeInterval) {
+        let audioNode = SKAudioNode(fileNamed: soundFile)
+        audioNode.autoplayLooped = false
+        addChild(audioNode)
+        let playAction = SKAction.play()
+        audioNode.run(SKAction.sequence([playAction, SKAction.wait(forDuration: duration), SKAction.removeFromParent()]))
+    }
 }
+

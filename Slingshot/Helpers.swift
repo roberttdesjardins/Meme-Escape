@@ -9,6 +9,7 @@
 
 import SpriteKit
 import Foundation
+import AVFoundation
 
 func gameOverSceneLoad(view: UIView) {
     let scene = GameOverScene(size: view.bounds.size)
