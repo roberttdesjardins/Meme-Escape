@@ -36,3 +36,21 @@ func random(min: CGFloat, max: CGFloat) -> CGFloat {
 func random() -> CGFloat {
     return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
 }
+
+public extension CGFloat {
+    /// Randomly returns either 1.0 or -1.0.
+    public static var randomSign: CGFloat {
+        return (arc4random_uniform(2) == 0) ? 1.0 : -1.0
+    }
+}
+
+public extension SKSpriteNode {
+    
+    public func moveSprite(location: CGPoint, duration: CGFloat) {
+        let actionMove = SKAction.move(to: location, duration: TimeInterval(duration))
+        let actionMoveDone = SKAction.removeFromParent()
+        self.run(SKAction.sequence([actionMove, actionMoveDone]))
+    }
+    
+}
+

@@ -14,16 +14,20 @@ import AVFoundation
 class Player: SKSpriteNode {
     
     var runSpeed:CGFloat =  3
+    var playerWidth:CGFloat = 40
+    var playerHeight:CGFloat = 40
     
-    func makeJump() {
+    func initPlayer() {
+        self.size = CGSize(width: playerWidth, height: playerHeight)
+        self.zPosition = 6
+        self.name = GameData.shared.kPlayerName
         
-        let jumpUp:SKAction = SKAction.moveBy(x: 0, y: 80, duration: 1)
-        let fallDown:SKAction = SKAction.moveBy(x: 0, y: -80, duration: 1)
-        
-        let seq:SKAction = SKAction.sequence( [ jumpUp, fallDown ])
-        
-        self.run(seq)
-        
+        self.physicsBody = SKPhysicsBody(circleOfRadius: 20)
+        self.physicsBody!.isDynamic = true
+        self.physicsBody?.affectedByGravity = false
+        self.physicsBody?.categoryBitMask = PhysicsCategory.Player
+        self.physicsBody?.contactTestBitMask = PhysicsCategory.Edge
+        self.physicsBody?.collisionBitMask = PhysicsCategory.Edge
     }
     
 }

@@ -10,23 +10,6 @@ import SpriteKit
 import GameplayKit
 import AVFoundation
 
-
-public extension CGFloat {
-    /// Randomly returns either 1.0 or -1.0.
-    public static var randomSign: CGFloat {
-        return (arc4random_uniform(2) == 0) ? 1.0 : -1.0
-    }
-}
-
-struct PhysicsCategory {
-    static let None: UInt32 = 0
-    static let Player: UInt32 = 0x1 << 1
-    static let Obstacle: UInt32 = 0x1 << 2
-    
-    static let Edge: UInt32 = 0x1 << 25
-    static let All: UInt32 = UInt32.max
-}
-
 class GameScene: SKScene, SKPhysicsContactDelegate {
     let worldNode = SKNode()
     
@@ -34,9 +17,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var lastUpdateTime : TimeInterval = 0
     private var startGame: Bool = false
     private var counter: Int = 0
-    
-    private var kPlayerName = "playerName"
-    private var kObstacleName = "obstacleName"
     
     
     override func sceneDidLoad() {
@@ -61,16 +41,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func createPlayer() {
         let player:Player = Player(imageNamed: "circle")
-        player.size = CGSize(width: 40, height: 40)
-        player.zPosition = 6
-        player.name = kPlayerName
-        
-        player.physicsBody = SKPhysicsBody(circleOfRadius: 20)
-        player.physicsBody!.isDynamic = true
-        player.physicsBody?.affectedByGravity = false
-        player.physicsBody?.categoryBitMask = PhysicsCategory.Player
-        player.physicsBody?.contactTestBitMask = PhysicsCategory.Edge
-        player.physicsBody?.collisionBitMask = PhysicsCategory.Edge
+        player.initPlayer()
         player.position = CGPoint(x: size.width * (1/2), y: size.height * (1/6))
         worldNode.addChild(player)
     }
@@ -112,23 +83,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addWall() {
-        let obs = SKSpriteNode(imageNamed: "white_pixel")
-        obs.name = kObstacleName
-        obs.size = CGSize(width: 30, height: size.height * (1/2))
-        obs.position = CGPoint(x: size.width + obs.size.width/2, y: random(min: obs.size.height/2, max: size.height - obs.size.height/2))
-        obs.zPosition = 1
-        
-        obs.physicsBody = SKPhysicsBody(rectangleOf: obs.size)
-        obs.physicsBody?.isDynamic = false
-        obs.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
-        obs.physicsBody?.contactTestBitMask = PhysicsCategory.Player
-        obs.physicsBody?.collisionBitMask = PhysicsCategory.None
+        let obs = Wall(imageNamed: "white_pixel")
+        obs.initWall(position: CGPoint(x: size.width + obs.size.width/2, y: random(min: obs.size.height/2, max: size.height - obs.size.height/2)))
         worldNode.addChild(obs)
         
-        let actualDuration = random(min: CGFloat(2.0), max: CGFloat(3.0))
-        let actionMove = SKAction.move(to: CGPoint(x: -obs.size.width/2, y: obs.position.y), duration: TimeInterval(actualDuration))
-        let actionMoveDone = SKAction.removeFromParent()
-        obs.run(SKAction.sequence([actionMove, actionMoveDone]))
+        obs.moveSprite(location: CGPoint(x: -obs.size.width/2, y: obs.position.y), duration: random(min: CGFloat(2.0), max: CGFloat(3.0)))
     }
     
     func obstacle2() {
@@ -151,34 +110,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addWednesday() {
-        let obs = SKSpriteNode(imageNamed: "myDudes")
-        obs.name = kObstacleName
-        obs.size = CGSize(width: 65, height: 65)
-        obs.position = CGPoint(x: size.width/2, y: -obs.size.height/2)
-        obs.zPosition = 2
-        obs.zRotation = random(min: 0, max: 6.28319)
-        
-        obs.physicsBody = SKPhysicsBody(texture: obs.texture!, size: obs.size)
-        obs.physicsBody?.isDynamic = true
-        obs.physicsBody?.affectedByGravity = true
-        obs.physicsBody?.allowsRotation = true
-        obs.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
-        obs.physicsBody?.contactTestBitMask = PhysicsCategory.Player
-        obs.physicsBody?.collisionBitMask = PhysicsCategory.None
+        let obs = WednesdayFrog(imageNamed: "myDudes")
+        obs.initWednesdayMyDudes(position: CGPoint(x: size.width/2, y: -obs.size.height/2))
         worldNode.addChild(obs)
         
-        let randomDX = random(min: -250, max: 250)
-        let randomDY = random(min: 450, max: 650)
-        obs.physicsBody?.applyForce(CGVector(dx: randomDX, dy: randomDY))
-        
-        let oneRevolution:SKAction = SKAction.rotate(byAngle: CGFloat.pi * 2 * CGFloat.randomSign, duration: TimeInterval(random(min: 0.5, max: 3.0)))
-        let repeatRotation:SKAction = SKAction.repeatForever(oneRevolution)
-        
-        obs.run(repeatRotation)
-        
-        let actionWait = SKAction.wait(forDuration: 5)
-        let actionWaitDone = SKAction.removeFromParent()
-        obs.run(SKAction.sequence([actionWait, actionWaitDone]))
+        obs.makeFrogMove()
     }
     
     func obstacle3() {
@@ -200,7 +136,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func touchDown(atPoint pos : CGPoint) {
-        if let player = worldNode.childNode(withName: kPlayerName) as? Player {
+        if let player = worldNode.childNode(withName: GameData.shared.kPlayerName) as? Player {
             startLabel.removeFromParent()
             startGame = true
             player.position = pos
@@ -208,7 +144,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func touchMoved(toPoint pos : CGPoint) {
-        if let player = worldNode.childNode(withName: kPlayerName) as? Player {
+        if let player = worldNode.childNode(withName: GameData.shared.kPlayerName) as? Player {
             player.position = pos
         }
     }
@@ -246,7 +182,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // Called when there is a collision between two nodes.
     func collisionBetween(ob1: SKNode, ob2: SKNode){
-        if ob1.name == kPlayerName && ob2.name == kObstacleName {
+        if ob1.name == GameData.shared.kPlayerName && ob2.name == GameData.shared.kObstacleName {
             gameOverSceneLoad(view: view!)
         }
     }
@@ -254,9 +190,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         guard let nodeA = contact.bodyA.node else { return }
         guard let nodeB = contact.bodyB.node else { return }
-        if nodeA.name == kPlayerName {
+        if nodeA.name == GameData.shared.kPlayerName {
             collisionBetween(ob1: nodeA, ob2: nodeB)
-        } else if nodeB.name == kPlayerName {
+        } else if nodeB.name == GameData.shared.kPlayerName {
             collisionBetween(ob1: nodeB, ob2: nodeA)
         }
     }
