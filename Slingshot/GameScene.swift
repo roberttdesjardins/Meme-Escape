@@ -64,7 +64,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case 3:
             obstacle3()
         case 4:
-            print("Obstacle 4")
+            obstacle4()
         case 5:
             print("Obstacle 5")
         case 6:
@@ -111,29 +111,89 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func addWednesday() {
         let obs = WednesdayFrog(imageNamed: "myDudes")
-        obs.initWednesdayMyDudes(position: CGPoint(x: size.width/2, y: -obs.size.height/2))
+        obs.initWednesdayMyDudes()
         worldNode.addChild(obs)
         
         obs.makeFrogMove()
     }
     
     func obstacle3() {
-        createWarningArea(width: size.width/10, height: size.height, position: CGPoint(x: size.width * (1/6), y: size.height/2), duration: 5.0)
-        createWarningArea(width: size.width/10, height: size.height, position: CGPoint(x: size.width * (3/6), y: size.height/2), duration: 5.0)
-        createWarningArea(width: size.width/10, height: size.height, position: CGPoint(x: size.width * (5/6), y: size.height/2), duration: 5.0)
+        let timeDuration = TimeInterval(2.5)
+        let pos1 = CGPoint(x: self.size.width * (1/6), y: self.size.height/2)
+        let pos2 = CGPoint(x: self.size.width * (3/6), y: self.size.height/2)
+        let pos3 = CGPoint(x: self.size.width * (5/6), y: self.size.height/2)
+        let actionOmaeSound = SKAction.run {
+            self.playSoundFile(soundFile: "omae", duration: timeDuration)
+        }
+        let actionWarning = SKAction.run {
+            self.createWarningArea(width: self.size.width/10, height: self.size.height, position: pos1, duration: 2.0)
+            self.createWarningArea(width: self.size.width/10, height: self.size.height, position: pos2, duration: 3.0)
+            self.createWarningArea(width: self.size.width/10, height: self.size.height, position: pos3, duration: 4.0)
+        }
+        let actionWait = SKAction.wait(forDuration: timeDuration)
+        
+        let actionNaniSound = SKAction.run {
+            self.playSoundFile(soundFile: "nani", duration: timeDuration)
+        }
+        
+        let actionWaitBetweenLaser = SKAction.wait(forDuration: 1.0)
+        
+        let actionLaser1 = SKAction.run {
+            let laser = Laser(imageNamed: "teslaColor1")
+            laser.initLaser(position: pos1)
+            self.worldNode.addChild(laser)
+            laser.runGif()
+            laser.runLaserSound()
+        }
+        
+        let actionLaser2 = SKAction.run {
+            let laser = Laser(imageNamed: "teslaColor1")
+            laser.initLaser(position: pos2)
+            self.worldNode.addChild(laser)
+            laser.runGif()
+            laser.runLaserSound()
+            
+        }
+        
+        let actionLaser3 = SKAction.run {
+            let laser = Laser(imageNamed: "teslaColor1")
+            laser.initLaser(position: pos3)
+            self.worldNode.addChild(laser)
+            laser.runGif()
+            laser.runLaserSound()
+        }
+        
+        
+        worldNode.run(SKAction.sequence([
+            actionOmaeSound,
+            actionWarning,
+            actionWait,
+            actionNaniSound,
+            actionLaser1,
+            actionWaitBetweenLaser,
+            actionLaser2,
+            actionWaitBetweenLaser,
+            actionLaser3
+            ]))
     }
     
     func createWarningArea(width: CGFloat, height: CGFloat, position: CGPoint, duration: TimeInterval) {
-        let warning = SKSpriteNode(imageNamed: "warning")
+        let warning = SKSpriteNode(imageNamed: "warningNoBorder")
         warning.size = CGSize(width: width, height: height)
         warning.position = position
         worldNode.addChild(warning)
+        
+        let warningBorder = SKShapeNode(rectOf: CGSize(width: width, height: height))
+        warningBorder.fillColor = .clear
+        warningBorder.lineWidth = 5
+        warningBorder.strokeColor = .red
+        warningBorder.alpha = 0.5
+        warning.addChild(warningBorder)
         
         let actionWait = SKAction.wait(forDuration: duration)
         let actionWaitDone = SKAction.removeFromParent()
         warning.run(SKAction.sequence([actionWait, actionWaitDone]))
     }
-    
     
     func touchDown(atPoint pos : CGPoint) {
         if let player = worldNode.childNode(withName: GameData.shared.kPlayerName) as? Player {
@@ -211,7 +271,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if startGame && CGFloat(dt) >= random(min: 4, max: 5) {
             self.lastUpdateTime = currentTime
-            randomObstacle(obsticle: Int(arc4random_uniform(3) + 1))
+            randomObstacle(obsticle: Int(arc4random_uniform(4) + 1))
         }
     }
 

@@ -13,12 +13,12 @@ import AVFoundation
 
 class WednesdayFrog: SKSpriteNode {
     
-    func initWednesdayMyDudes(position: CGPoint) {
+    func initWednesdayMyDudes() {
         self.name = GameData.shared.kObstacleName
         self.size = CGSize(width: 65, height: 65)
         self.zPosition = 2
         self.zRotation = random(min: 0, max: 6.28319)
-        self.position = position
+        self.position = CGPoint(x: GameData.shared.deviceWidth/2, y: -self.size.height/2)
         
         self.physicsBody = SKPhysicsBody(texture: self.texture!, size: self.size)
         self.physicsBody?.isDynamic = true

@@ -14,7 +14,7 @@ class Wall: SKSpriteNode {
     func initWall(position: CGPoint) {
         self.name = GameData.shared.kObstacleName
         self.size = CGSize(width: 30, height: GameData.shared.deviceHeight * (1/2))
-        self.zPosition = 1
+        self.zPosition = 2
         self.position = position
         
         self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
