@@ -62,9 +62,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case 2:
             obstacle2()
         case 3:
-            obstacle3()
+            let shuffled = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: [1, 3, 5])
+            obstacle3(order: shuffled as! [CGFloat])
         case 4:
-            obstacle4()
+            //obstacle4()
+            print("Obstacle 4")
         case 5:
             print("Obstacle 5")
         case 6:
@@ -117,11 +119,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         obs.makeFrogMove()
     }
     
-    func obstacle3() {
+    func obstacle3(order: [CGFloat]) {
         let timeDuration = TimeInterval(2.5)
-        let pos1 = CGPoint(x: self.size.width * (1/6), y: self.size.height/2)
-        let pos2 = CGPoint(x: self.size.width * (3/6), y: self.size.height/2)
-        let pos3 = CGPoint(x: self.size.width * (5/6), y: self.size.height/2)
+        let pos1 = CGPoint(x: self.size.width * (order[0]/6), y: self.size.height/2)
+        let pos2 = CGPoint(x: self.size.width * (order[1]/6), y: self.size.height/2)
+        let pos3 = CGPoint(x: self.size.width * (order[2]/6), y: self.size.height/2)
         let actionOmaeSound = SKAction.run {
             self.playSoundFile(soundFile: "omae", duration: timeDuration)
         }
@@ -135,32 +137,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let actionNaniSound = SKAction.run {
             self.playSoundFile(soundFile: "nani", duration: timeDuration)
         }
-        
         let actionWaitBetweenLaser = SKAction.wait(forDuration: 1.0)
         
         let actionLaser1 = SKAction.run {
-            let laser = Laser(imageNamed: "teslaColor1")
-            laser.initLaser(position: pos1)
-            self.worldNode.addChild(laser)
-            laser.runGif()
-            laser.runLaserSound()
+            self.createLaserBeam(position: pos1)
         }
-        
         let actionLaser2 = SKAction.run {
-            let laser = Laser(imageNamed: "teslaColor1")
-            laser.initLaser(position: pos2)
-            self.worldNode.addChild(laser)
-            laser.runGif()
-            laser.runLaserSound()
-            
+            self.createLaserBeam(position: pos2)
         }
-        
         let actionLaser3 = SKAction.run {
-            let laser = Laser(imageNamed: "teslaColor1")
-            laser.initLaser(position: pos3)
-            self.worldNode.addChild(laser)
-            laser.runGif()
-            laser.runLaserSound()
+            self.createLaserBeam(position: pos3)
         }
         
         
@@ -175,6 +161,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             actionWaitBetweenLaser,
             actionLaser3
             ]))
+    }
+    
+    func createLaserBeam(position: CGPoint) {
+        let laser = Laser(imageNamed: "teslaColor1")
+        laser.initLaser(position: position)
+        self.worldNode.addChild(laser)
+        laser.runGif()
+        self.playSoundFile(soundFile: "laserbeamsound", duration: 5.0)
     }
     
     func createWarningArea(width: CGFloat, height: CGFloat, position: CGPoint, duration: TimeInterval) {
@@ -274,7 +268,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             randomObstacle(obsticle: Int(arc4random_uniform(4) + 1))
         }
     }
-
+    
     func playSoundFile(soundFile: String, duration: TimeInterval) {
         let audioNode = SKAudioNode(fileNamed: soundFile)
         audioNode.autoplayLooped = false

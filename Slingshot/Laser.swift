@@ -37,7 +37,4 @@ class Laser: SKSpriteNode {
         })
     }
     
-    func runLaserSound() {
-        // TODO: play laser sounds
-    }
 }

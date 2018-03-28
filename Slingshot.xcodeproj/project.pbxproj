@@ -27,6 +27,7 @@
 		559D5CF7206745A60088B5FC /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559D5CF6206745A60088B5FC /* Player.swift */; };
 		559D5CF9206749040088B5FC /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559D5CF8206749040088B5FC /* GameOverScene.swift */; };
 		559D5CFB206749590088B5FC /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559D5CFA206749590088B5FC /* Helpers.swift */; };
+		55A616CA206C0A1500B2BAC8 /* laserbeamsound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55A616C9206C0A1500B2BAC8 /* laserbeamsound.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		559D5CF6206745A60088B5FC /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		559D5CF8206749040088B5FC /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		559D5CFA206749590088B5FC /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		55A616C9206C0A1500B2BAC8 /* laserbeamsound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = laserbeamsound.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				557819E4206822D80064C221 /* wednesday.wav */,
 				552094942069C00D0057D6FF /* omae.wav */,
 				552094962069C0110057D6FF /* nani.wav */,
+				55A616C9206C0A1500B2BAC8 /* laserbeamsound.wav */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				552094952069C00D0057D6FF /* omae.wav in Resources */,
 				559D5CCC206723A20088B5FC /* Main.storyboard in Resources */,
 				552094972069C0110057D6FF /* nani.wav in Resources */,
+				55A616CA206C0A1500B2BAC8 /* laserbeamsound.wav in Resources */,
 				557819E6206822D80064C221 /* wednesday.wav in Resources */,
 				559D5CCE206723A20088B5FC /* Assets.xcassets in Resources */,
 				557819E7206822D80064C221 /* myDudes.wav in Resources */,
