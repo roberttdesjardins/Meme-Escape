@@ -51,7 +51,7 @@ class GameOverScene: SKScene {
     }
     
     func playLosingSound() {
-        let randomSound = Int(arc4random_uniform(3))
+        let randomSound = Int(arc4random_uniform(4))
         var path:String = ""
         
         switch randomSound {
@@ -61,8 +61,10 @@ class GameOverScene: SKScene {
             path = Bundle.main.path(forResource: "losinghorn.wav", ofType:nil)!
         case 2:
             path = Bundle.main.path(forResource: "ohshit.wav", ofType:nil)!
+        case 3:
+            path = Bundle.main.path(forResource: "donethis.wav", ofType:nil)!
         default:
-            print("playLosingSound out of range")
+            print("playLosingSound no case")
         }
         let url = URL(fileURLWithPath: path)
         

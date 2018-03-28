@@ -21,6 +21,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var highScoreTable = SKLabelNode(fontNamed: "Avenir")
     private var highScoreBackground: SKSpriteNode! = nil
     
+    private var firstTimeStart = true
+    
     
     override func sceneDidLoad() {
         processGameData()
@@ -133,19 +135,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func obstacle1() {
+        let wallDirection = ["Left", "Right"].randomItem()
+        
         worldNode.run(SKAction.repeat(SKAction.sequence([
             SKAction.run {
-                self.addWall()
+                self.addWall(direction: wallDirection!)
             },
             SKAction.wait(forDuration: TimeInterval(random(min: 0.5, max: 1.0)))]), count: 7))
     }
     
-    func addWall() {
+    func addWall(direction: String) {
         let obs = Wall(imageNamed: "white_pixel")
-        obs.initWall(position: CGPoint(x: size.width + obs.size.width/2, y: random(min: obs.size.height/2, max: size.height - obs.size.height/2)))
+        if direction == "Right" {
+            obs.initWall()
+            obs.position = CGPoint(x: 0 - obs.size.width/2, y: random(min: obs.size.height/2, max: size.height - obs.size.height/2))
+            obs.moveSprite(location: CGPoint(x: size.width + obs.size.width/2, y: obs.position.y), duration: 2.2)
+        } else if direction == "Left" {
+            obs.initWall()
+            obs.position =  CGPoint(x: size.width + obs.size.width/2, y: random(min: obs.size.height/2, max: size.height - obs.size.height/2))
+            obs.moveSprite(location: CGPoint(x: -obs.size.width/2, y: obs.position.y), duration: 2.2)
+        }
         worldNode.addChild(obs)
         
-        obs.moveSprite(location: CGPoint(x: -obs.size.width/2, y: obs.position.y), duration: 2.2)
     }
     
     func obstacle2() {
@@ -294,13 +305,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func touchDown(atPoint pos : CGPoint) {
         if let player = worldNode.childNode(withName: GameData.shared.kPlayerName) as? Player {
-            startLabel.removeFromParent()
-            highScoreTable.removeFromParent()
-            highScoreBackground.removeFromParent()
             startGame = true
             player.position = pos
-            createHud()
-            randomObstacle(obsticle: Int(arc4random_uniform(6) + 1))
         }
     }
     
@@ -361,6 +367,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         
+        if startGame && firstTimeStart {
+            firstTimeStart = false
+            startLabel.removeFromParent()
+            highScoreTable.removeFromParent()
+            highScoreBackground.removeFromParent()
+            createHud()
+            randomObstacle(obsticle: Int(arc4random_uniform(6) + 1))
+        }
+        
         if startGame {
             counter = counter + 1
             GameData.shared.playerScore = GameData.shared.playerScore + 1
@@ -376,7 +391,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if startGame && CGFloat(dt) >= random(min: 4, max: 5) {
             self.lastUpdateTime = currentTime
             //randomObstacle(obsticle: Int(arc4random_uniform(6) + 1))
-            randomObstacle(obsticle: 6)
+            randomObstacle(obsticle: 1)
         }
     }
     
