@@ -47,6 +47,48 @@ func createRandomPoint() -> CGPoint{
     return CGPoint(x: randomX, y: randomY)
 }
 
+func resetGameData() {
+    GameData.shared.playerScore = 0
+    GameData.shared.creditsEarned = 0
+}
+
+func formatHighScores(arrayOfScores: [Int]) {
+    GameData.shared.playerHighScore = quicksort(arrayOfScores)
+    GameData.shared.playerHighScore = Array(GameData.shared.playerHighScore.prefix(5))
+}
+
+func quicksort<T: Comparable>(_ a: [T]) -> [T] {
+    guard a.count > 1 else { return a }
+    
+    let pivot = a[a.count/2]
+    let less = a.filter { $0 < pivot }
+    let equal = a.filter { $0 == pivot }
+    let greater = a.filter { $0 > pivot }
+    
+    return quicksort(greater) + equal + quicksort(less)
+}
+
+func + (left: CGPoint, right: CGPoint) -> CGPoint {
+    return CGPoint(x: left.x + right.x, y: left.y + right.y)
+}
+
+func - (left: CGPoint, right: CGPoint) -> CGPoint {
+    return CGPoint(x: left.x - right.x, y: left.y - right.y)
+}
+
+func * (point: CGPoint, scalar: CGFloat) -> CGPoint {
+    return CGPoint(x: point.x * scalar, y: point.y * scalar)
+}
+
+func / (point: CGPoint, scalar: CGFloat) -> CGPoint {
+    return CGPoint(x: point.x / scalar, y: point.y / scalar)
+}
+
+func - (left: CGSize, right: CGSize) -> CGSize {
+    return CGSize(width: left.width - right.width, height: left.height - right.height)
+}
+
+
 public extension CGFloat {
     /// Randomly returns either 1.0 or -1.0.
     public static var randomSign: CGFloat {

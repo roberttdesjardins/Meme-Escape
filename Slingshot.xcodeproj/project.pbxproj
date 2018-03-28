@@ -36,6 +36,7 @@
 		55A616DA206C232700B2BAC8 /* pranked.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55A616D9206C232700B2BAC8 /* pranked.wav */; };
 		55A616DC206C232E00B2BAC8 /* losinghorn.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55A616DB206C232E00B2BAC8 /* losinghorn.wav */; };
 		55A616DE206C235100B2BAC8 /* ohshit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55A616DD206C235100B2BAC8 /* ohshit.wav */; };
+		55A616E0206C26F500B2BAC8 /* UserDefaultExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A616DF206C26F500B2BAC8 /* UserDefaultExt.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		55A616D9206C232700B2BAC8 /* pranked.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pranked.wav; sourceTree = "<group>"; };
 		55A616DB206C232E00B2BAC8 /* losinghorn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = losinghorn.wav; sourceTree = "<group>"; };
 		55A616DD206C235100B2BAC8 /* ohshit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ohshit.wav; sourceTree = "<group>"; };
+		55A616DF206C26F500B2BAC8 /* UserDefaultExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultExt.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,21 +164,22 @@
 				557819E3206822CD0064C221 /* Audio */,
 				559D5CC0206723A20088B5FC /* AppDelegate.swift */,
 				559D5CC6206723A20088B5FC /* GameScene.swift */,
+				559D5CF8206749040088B5FC /* GameOverScene.swift */,
 				559D5CC8206723A20088B5FC /* GameViewController.swift */,
 				559D5CCA206723A20088B5FC /* Main.storyboard */,
 				559D5CCD206723A20088B5FC /* Assets.xcassets */,
 				559D5CCF206723A20088B5FC /* LaunchScreen.storyboard */,
 				559D5CD2206723A20088B5FC /* Info.plist */,
 				559D5CF6206745A60088B5FC /* Player.swift */,
-				559D5CF8206749040088B5FC /* GameOverScene.swift */,
 				559D5CFA206749590088B5FC /* Helpers.swift */,
 				5520948C2069ABA10057D6FF /* WednesdayFrog.swift */,
 				552094922069B1430057D6FF /* Wall.swift */,
 				552094982069C1F50057D6FF /* Laser.swift */,
 				55A616CB206C0D8700B2BAC8 /* Illuminati.swift */,
+				55A616D1206C1F2800B2BAC8 /* HitMarker.swift */,
 				5520948E2069AE330057D6FF /* PhysicsCategory.swift */,
 				552094902069AEBA0057D6FF /* GameData.swift */,
-				55A616D1206C1F2800B2BAC8 /* HitMarker.swift */,
+				55A616DF206C26F500B2BAC8 /* UserDefaultExt.swift */,
 			);
 			path = Slingshot;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				5520948F2069AE330057D6FF /* PhysicsCategory.swift in Sources */,
 				559D5CFB206749590088B5FC /* Helpers.swift in Sources */,
 				55A616CC206C0D8700B2BAC8 /* Illuminati.swift in Sources */,
+				55A616E0206C26F500B2BAC8 /* UserDefaultExt.swift in Sources */,
 				552094992069C1F50057D6FF /* Laser.swift in Sources */,
 				55A616D2206C1F2800B2BAC8 /* HitMarker.swift in Sources */,
 				559D5CC7206723A20088B5FC /* GameScene.swift in Sources */,

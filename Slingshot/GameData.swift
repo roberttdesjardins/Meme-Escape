@@ -16,6 +16,11 @@ class GameData {
     var kObstacleName = "obstacleName"
     var deviceWidth = UIScreen.main.bounds.size.width
     var deviceHeight = UIScreen.main.bounds.size.height
+    
+    var playerScore = 0
+    var playerHighScore: [Int] = []
+    var creditsEarned: Int = 0
+    var totalCredits: Int = 0
 
     private init() { }
 }

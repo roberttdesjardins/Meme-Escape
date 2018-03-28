@@ -14,19 +14,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let worldNode = SKNode()
     
     private var startLabel: SKLabelNode! = nil
+    private var scoreLabel = SKLabelNode(fontNamed: "Avenir")
     private var lastUpdateTime : TimeInterval = 0
     private var startGame: Bool = false
     private var counter: Int = 0
+    private var highScoreTable = SKLabelNode(fontNamed: "Avenir")
+    private var highScoreBackground: SKSpriteNode! = nil
     
     
     override func sceneDidLoad() {
+        processGameData()
         addChild(worldNode)
         physicsWorld.contactDelegate = self
         self.lastUpdateTime = 0
         createScreen()
         createPlayer()
+        createHighScoreTable()
         setUpTouchScreenToStartLabel()
         self.physicsWorld.gravity = CGVector(dx: 0.0, dy: -2.0)
+    }
+    
+    func processGameData() {
+        GameData.shared.playerHighScore = UserDefaults.standard.getUserHighScores()
+        GameData.shared.totalCredits = UserDefaults.standard.getUserCredits()
     }
     
     func createScreen() {
@@ -44,6 +54,53 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.initPlayer()
         player.position = CGPoint(x: size.width * (1/2), y: size.height * (1/6))
         worldNode.addChild(player)
+    }
+    
+    
+    func createHud() {
+        scoreLabel.fontSize = 15
+        scoreLabel.fontColor = SKColor.white
+        scoreLabel.text = String("Score: \(GameData.shared.playerScore)")
+        
+        //TODO: Test this on iphoneX
+        if UIScreen.main.nativeBounds.height == 2436.0 {
+            scoreLabel.position = CGPoint(x: 0, y: size.height - (scoreLabel.frame.size.height + 22))
+        } else {
+            scoreLabel.position = CGPoint(x: 0, y: size.height - scoreLabel.frame.size.height)
+        }
+        
+        scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        scoreLabel.zPosition = 20
+        addChild(scoreLabel)
+    }
+    
+    func updateHud(){
+        scoreLabel.text = String("Score: \(GameData.shared.playerScore)")
+    }
+    
+    func createHighScoreTable() {
+        highScoreTable.fontSize = size.width / 48
+        highScoreTable.zPosition = 5
+        highScoreTable.fontColor = SKColor.white
+        highScoreTable.numberOfLines = 6
+        highScoreTable.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+        highScoreTable.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+        highScoreTable.text = "High Scores:\n"
+        for highScore in GameData.shared.playerHighScore {
+            highScoreTable.text?.append("\(highScore)\n")
+        }
+        
+        addChild(highScoreTable)
+        
+        let scoreBGWidth = highScoreTable.frame.size.width + 40
+        let scoreBGHeight = scoreBGWidth * 1.3042596349
+        highScoreBackground = SKSpriteNode(imageNamed: "vertical-medium")
+        highScoreBackground.zPosition = 2
+        highScoreBackground.size = CGSize(width: scoreBGWidth, height: scoreBGHeight)
+        highScoreBackground.position = CGPoint(x: size.width - highScoreBackground.size.width/2, y: size.height - highScoreBackground.size.height/2)
+        addChild(highScoreBackground)
+        
+        highScoreTable.position = highScoreBackground.position
     }
     
     func setUpTouchScreenToStartLabel() {
@@ -238,8 +295,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func touchDown(atPoint pos : CGPoint) {
         if let player = worldNode.childNode(withName: GameData.shared.kPlayerName) as? Player {
             startLabel.removeFromParent()
+            highScoreTable.removeFromParent()
+            highScoreBackground.removeFromParent()
             startGame = true
             player.position = pos
+            createHud()
+            randomObstacle(obsticle: Int(arc4random_uniform(6) + 1))
         }
     }
     
@@ -299,8 +360,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+        
         if startGame {
             counter = counter + 1
+            GameData.shared.playerScore = GameData.shared.playerScore + 1
+            updateHud()
         }
         // Initialize _lastUpdateTime if it has not already been
         if (self.lastUpdateTime == 0) {
@@ -311,8 +375,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if startGame && CGFloat(dt) >= random(min: 4, max: 5) {
             self.lastUpdateTime = currentTime
-            randomObstacle(obsticle: Int(arc4random_uniform(5) + 1))
-            //randomObstacle(obsticle: 5)
+            //randomObstacle(obsticle: Int(arc4random_uniform(6) + 1))
+            randomObstacle(obsticle: 6)
         }
     }
     

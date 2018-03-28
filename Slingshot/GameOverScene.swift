@@ -20,6 +20,14 @@ class GameOverScene: SKScene {
         self.backgroundColor = SKColor.black
         createRestartButton()
         playLosingSound()
+        GameData.shared.creditsEarned = GameData.shared.creditsEarned + Int(round(Double(GameData.shared.playerScore/35)))
+        createScoreLabel()
+        GameData.shared.playerHighScore.append(GameData.shared.playerScore)
+        formatHighScores(arrayOfScores: GameData.shared.playerHighScore)
+        UserDefaults.standard.setUserHighScores(array: GameData.shared.playerHighScore)
+        let newCreditBalance = GameData.shared.totalCredits + GameData.shared.creditsEarned
+        UserDefaults.standard.setUserCredits(credits: newCreditBalance)
+        resetGameData()
     }
     
     func createRestartButton() {
@@ -30,6 +38,16 @@ class GameOverScene: SKScene {
         restartButton.size = CGSize(width: buttonWidth, height: buttonHeight)
         restartButton.position = CGPoint(x: size.width/2, y: restartButton.size.height + 10)
         addChild(restartButton)
+    }
+    
+    func createScoreLabel() {
+        let scoreLabel = SKLabelNode(fontNamed: "Avenir")
+        scoreLabel.fontSize = 35
+        scoreLabel.fontColor = SKColor.white
+        scoreLabel.text = "Score: \(GameData.shared.playerScore)"
+        scoreLabel.position = restartButton.position - CGPoint(x: 0, y: (restartButton.size.height/2 + 35))
+        
+        self.addChild(scoreLabel)
     }
     
     func playLosingSound() {
