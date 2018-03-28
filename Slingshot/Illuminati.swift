@@ -34,9 +34,7 @@ class Illuminati: SKSpriteNode {
     
     
     func moveForDuration(time: TimeInterval){
-        let randomX = random(min: 0, max: GameData.shared.deviceWidth)
-        let randomY = random(min: 0, max: GameData.shared.deviceHeight)
-        let randomPoint = CGPoint(x: randomX, y: randomY)
+        let randomPoint = createRandomPoint()
         
         let distanceToRandomPoint = distanceBetweenTwoPoints(point1: self.position, point2: randomPoint)
         let actualDuration = distanceToRandomPoint/GameData.shared.deviceHeight

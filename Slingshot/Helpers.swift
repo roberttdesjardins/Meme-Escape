@@ -41,6 +41,12 @@ func distanceBetweenTwoPoints(point1: CGPoint, point2: CGPoint) -> CGFloat {
     return sqrt(pow(point1.x - point2.x, 2) + pow(point1.y - point2.y, 2))
 }
 
+func createRandomPoint() -> CGPoint{
+    let randomX = random(min: 0, max: GameData.shared.deviceWidth)
+    let randomY = random(min: 0, max: GameData.shared.deviceHeight)
+    return CGPoint(x: randomX, y: randomY)
+}
+
 public extension CGFloat {
     /// Randomly returns either 1.0 or -1.0.
     public static var randomSign: CGFloat {

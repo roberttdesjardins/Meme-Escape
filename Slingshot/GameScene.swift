@@ -67,7 +67,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case 4:
             obstacle4()
         case 5:
-            print("Obstacle 5")
+            obstacle5()
         case 6:
             print("Obstacle 6")
         default:
@@ -203,6 +203,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         playSoundFile(soundFile: "illuminati", duration: moveDuration)
     }
     
+    func obstacle5() {
+        worldNode.run(SKAction.sequence([
+            SKAction.run {
+                self.playSoundFile(soundFile: "triple", duration: 6.0)
+            },
+            SKAction.wait(forDuration: 2.0),
+            SKAction.repeat(SKAction.sequence([
+                SKAction.run {
+                    let randomPoint = createRandomPoint()
+                    self.createHitMarker(position: randomPoint)
+                },
+                SKAction.wait(forDuration: 0.3)]), count: 3)
+            ]))
+    }
+    
+    func createHitMarker(position: CGPoint) {
+        let hitMarker = HitMarker(imageNamed: "hitmarker")
+        hitMarker.initHitMarker(position: position)
+        worldNode.addChild(hitMarker)
+        
+        playSoundFile(soundFile: "hitmarker", duration: 1.0)
+        
+        let actionWait = SKAction.wait(forDuration: 1.0)
+        let actionWaitDone = SKAction.removeFromParent()
+        hitMarker.run(SKAction.sequence([actionWait, actionWaitDone]))
+    }
+    
     
     func touchDown(atPoint pos : CGPoint) {
         if let player = worldNode.childNode(withName: GameData.shared.kPlayerName) as? Player {
@@ -280,8 +307,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if startGame && CGFloat(dt) >= random(min: 4, max: 5) {
             self.lastUpdateTime = currentTime
-            randomObstacle(obsticle: Int(arc4random_uniform(4) + 1))
-            //randomObstacle(obsticle: 4)
+            //randomObstacle(obsticle: Int(arc4random_uniform(5) + 1))
+            randomObstacle(obsticle: 5)
         }
     }
     
