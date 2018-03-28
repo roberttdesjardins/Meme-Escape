@@ -11,6 +11,10 @@ import SpriteKit
 import Foundation
 import AVFoundation
 
+let Pi = CGFloat(Double.pi)
+let DegreesToRadians = Pi / 180
+let RadiansToDegrees = 180 / Pi
+
 func gameOverSceneLoad(view: UIView) {
     let scene = GameOverScene(size: view.bounds.size)
     let skView = view as! SKView

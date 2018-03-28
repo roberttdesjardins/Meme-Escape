@@ -134,6 +134,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    
+    // Creates a sequence of walls moving from the left or right of the screen
     func obstacle1() {
         let wallDirection = ["Left", "Right"].randomItem()
         
@@ -159,6 +161,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    // Creates an "Explosion" of wednesdayFrogs from the center bottom of the screen
     func obstacle2() {
         let timeDuration = TimeInterval(3.0)
         let actionWednesdaySound = SKAction.run {
@@ -186,6 +189,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         obs.makeFrogMove()
     }
     
+    // Creates a 3 warning areas before creating laserBeams in those areas accompanied with sounds. Order is random.
     func obstacle3(order: [CGFloat]) {
         let timeDuration = TimeInterval(2.5)
         let pos1 = CGPoint(x: self.size.width * (order[0]/6), y: self.size.height/2)
@@ -256,6 +260,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         warning.run(SKAction.sequence([actionWait, actionWaitDone]))
     }
     
+    // Create illuminati triangle that randomly moves around the screen
     func obstacle4() {
         let triangle = Illuminati(imageNamed: "Illuminati")
         let randomXPos = size.width/2 + (size.width/2 + triangle.size.width/2) * CGFloat.randomSign
@@ -271,6 +276,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         playSoundFile(soundFile: "illuminati", duration: moveDuration)
     }
     
+    // creates 3 hitMarkers in random locations accompanied by sound
     func obstacle5() {
         worldNode.run(SKAction.sequence([
             SKAction.run {
@@ -298,7 +304,59 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         hitMarker.run(SKAction.sequence([actionWait, actionWaitDone]))
     }
     
+    // creates an air horn which enters top, bottom, left, right or a corner of the screen and creates a soundwave which kills the player in that area accompanied by an airhorn blast sound
     func obstacle6() {
+        let airHorn = AirHorn(imageNamed: "airhorn")
+        airHorn.initHorn()
+        worldNode.addChild(airHorn)
+        let startPosition = ["Left", "Right", "Top", "Bottom", "TopLeft", "TopRight", "BottomLeft", "BottomRight"].randomItem()
+
+        switch startPosition {
+        case "Left"?:
+            airHorn.xScale = airHorn.xScale * -1
+            airHorn.position = CGPoint(x: 0 - airHorn.size.width/2, y: size.height/2)
+            let positionToMoveTo = CGPoint(x: airHorn.size.width/8, y: size.height/2)
+            airHorn.run(SKAction.move(to: positionToMoveTo, duration: 2.0))
+        case "Right"?:
+            airHorn.position = CGPoint(x: size.width + airHorn.size.width/2, y: size.height/2)
+            let positionToMoveTo = CGPoint(x: size.width - airHorn.size.width/8, y: size.height/2)
+            airHorn.run(SKAction.move(to: positionToMoveTo, duration: 2.0))
+        case "Top"?:
+            airHorn.zRotation = 90 * DegreesToRadians
+            airHorn.position = CGPoint(x: size.width/2, y: size.height + airHorn.size.height)
+            let positionToMoveTo = CGPoint(x: size.width/2, y: size.height - airHorn.size.height/8)
+            airHorn.run(SKAction.move(to: positionToMoveTo, duration: 2.0))
+        case "Bottom"?:
+            airHorn.xScale = airHorn.xScale * -1
+            airHorn.zRotation = 90 * DegreesToRadians
+            airHorn.position = CGPoint(x: size.width/2, y: 0 - airHorn.size.height)
+            let positionToMoveTo = CGPoint(x: size.width/2, y: airHorn.size.height/8)
+            airHorn.run(SKAction.move(to: positionToMoveTo, duration: 2.0))
+        case "TopLeft"?:
+            airHorn.xScale = airHorn.xScale * -1
+            airHorn.zRotation = 315 * DegreesToRadians
+            airHorn.position = CGPoint(x: 0 - airHorn.size.width, y: size.height + airHorn.size.height)
+            let positionToMoveTo = CGPoint(x: 0 + airHorn.size.width/8, y: size.height - airHorn.size.height/8)
+            airHorn.run(SKAction.move(to: positionToMoveTo, duration: 2.0))
+        case "TopRight"?:
+            airHorn.zRotation = 45 * DegreesToRadians
+            airHorn.position = CGPoint(x: size.width + airHorn.size.width, y: size.height + airHorn.size.height)
+            let positionToMoveTo = CGPoint(x: size.width - airHorn.size.width/8, y: size.height - airHorn.size.height/8)
+            airHorn.run(SKAction.move(to: positionToMoveTo, duration: 2.0))
+        case "BottomLeft"?:
+            airHorn.xScale = airHorn.xScale * -1
+            airHorn.zRotation = 45 * DegreesToRadians
+            airHorn.position = CGPoint(x: 0 - airHorn.size.width, y: 0 - airHorn.size.height)
+            let positionToMoveTo = CGPoint(x: 0 + airHorn.size.width/8, y: 0 + airHorn.size.height/8)
+            airHorn.run(SKAction.move(to: positionToMoveTo, duration: 2.0))
+        case "BottomRight"?:
+            airHorn.zRotation = 315 * DegreesToRadians
+            airHorn.position = CGPoint(x: size.width + airHorn.size.width, y: 0 - airHorn.size.height)
+            let positionToMoveTo = CGPoint(x: size.width - airHorn.size.width/8, y: 0 + airHorn.size.height/8)
+            airHorn.run(SKAction.move(to: positionToMoveTo, duration: 2.0))
+        default:
+            print("AirHorn startPosition Default error")
+        }
         
     }
     
@@ -391,7 +449,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if startGame && CGFloat(dt) >= random(min: 4, max: 5) {
             self.lastUpdateTime = currentTime
             //randomObstacle(obsticle: Int(arc4random_uniform(6) + 1))
-            randomObstacle(obsticle: 1)
+            randomObstacle(obsticle: 6)
         }
     }
     
