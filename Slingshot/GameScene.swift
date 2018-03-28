@@ -69,7 +69,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case 5:
             obstacle5()
         case 6:
-            print("Obstacle 6")
+            obstacle6()
         default:
             print("Default Obstacle")
         }
@@ -80,7 +80,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             SKAction.run {
                 self.addWall()
             },
-            SKAction.wait(forDuration: TimeInterval(random(min: 0.5, max: 1.0)))]), count: 5))
+            SKAction.wait(forDuration: TimeInterval(random(min: 0.5, max: 1.0)))]), count: 7))
     }
     
     func addWall() {
@@ -230,6 +230,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         hitMarker.run(SKAction.sequence([actionWait, actionWaitDone]))
     }
     
+    func obstacle6() {
+        
+    }
+    
     
     func touchDown(atPoint pos : CGPoint) {
         if let player = worldNode.childNode(withName: GameData.shared.kPlayerName) as? Player {
@@ -307,8 +311,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if startGame && CGFloat(dt) >= random(min: 4, max: 5) {
             self.lastUpdateTime = currentTime
-            //randomObstacle(obsticle: Int(arc4random_uniform(5) + 1))
-            randomObstacle(obsticle: 5)
+            randomObstacle(obsticle: Int(arc4random_uniform(5) + 1))
+            //randomObstacle(obsticle: 5)
         }
     }
     

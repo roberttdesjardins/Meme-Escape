@@ -33,6 +33,9 @@
 		55A616D2206C1F2800B2BAC8 /* HitMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A616D1206C1F2800B2BAC8 /* HitMarker.swift */; };
 		55A616D6206C201D00B2BAC8 /* hitmarker.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55A616D5206C201D00B2BAC8 /* hitmarker.wav */; };
 		55A616D8206C20F500B2BAC8 /* triple.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55A616D7206C20F500B2BAC8 /* triple.wav */; };
+		55A616DA206C232700B2BAC8 /* pranked.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55A616D9206C232700B2BAC8 /* pranked.wav */; };
+		55A616DC206C232E00B2BAC8 /* losinghorn.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55A616DB206C232E00B2BAC8 /* losinghorn.wav */; };
+		55A616DE206C235100B2BAC8 /* ohshit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55A616DD206C235100B2BAC8 /* ohshit.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +88,9 @@
 		55A616D1206C1F2800B2BAC8 /* HitMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitMarker.swift; sourceTree = "<group>"; };
 		55A616D5206C201D00B2BAC8 /* hitmarker.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hitmarker.wav; sourceTree = "<group>"; };
 		55A616D7206C20F500B2BAC8 /* triple.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = triple.wav; sourceTree = "<group>"; };
+		55A616D9206C232700B2BAC8 /* pranked.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pranked.wav; sourceTree = "<group>"; };
+		55A616DB206C232E00B2BAC8 /* losinghorn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = losinghorn.wav; sourceTree = "<group>"; };
+		55A616DD206C235100B2BAC8 /* ohshit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ohshit.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +129,9 @@
 				55A616CD206C150A00B2BAC8 /* illuminati.wav */,
 				55A616D5206C201D00B2BAC8 /* hitmarker.wav */,
 				55A616D7206C20F500B2BAC8 /* triple.wav */,
+				55A616D9206C232700B2BAC8 /* pranked.wav */,
+				55A616DB206C232E00B2BAC8 /* losinghorn.wav */,
+				55A616DD206C235100B2BAC8 /* ohshit.wav */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -297,6 +306,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55A616DC206C232E00B2BAC8 /* losinghorn.wav in Resources */,
 				552094952069C00D0057D6FF /* omae.wav in Resources */,
 				55A616D8206C20F500B2BAC8 /* triple.wav in Resources */,
 				559D5CCC206723A20088B5FC /* Main.storyboard in Resources */,
@@ -305,6 +315,8 @@
 				557819E6206822D80064C221 /* wednesday.wav in Resources */,
 				559D5CCE206723A20088B5FC /* Assets.xcassets in Resources */,
 				55A616D6206C201D00B2BAC8 /* hitmarker.wav in Resources */,
+				55A616DE206C235100B2BAC8 /* ohshit.wav in Resources */,
+				55A616DA206C232700B2BAC8 /* pranked.wav in Resources */,
 				557819E7206822D80064C221 /* myDudes.wav in Resources */,
 				559D5CD1206723A20088B5FC /* LaunchScreen.storyboard in Resources */,
 				55A616CE206C150A00B2BAC8 /* illuminati.wav in Resources */,
