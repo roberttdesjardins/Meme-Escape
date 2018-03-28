@@ -28,6 +28,8 @@
 		559D5CF9206749040088B5FC /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559D5CF8206749040088B5FC /* GameOverScene.swift */; };
 		559D5CFB206749590088B5FC /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559D5CFA206749590088B5FC /* Helpers.swift */; };
 		55A616CA206C0A1500B2BAC8 /* laserbeamsound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55A616C9206C0A1500B2BAC8 /* laserbeamsound.wav */; };
+		55A616CC206C0D8700B2BAC8 /* Illuminati.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A616CB206C0D8700B2BAC8 /* Illuminati.swift */; };
+		55A616CE206C150A00B2BAC8 /* illuminati.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55A616CD206C150A00B2BAC8 /* illuminati.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,8 @@
 		559D5CF8206749040088B5FC /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		559D5CFA206749590088B5FC /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		55A616C9206C0A1500B2BAC8 /* laserbeamsound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = laserbeamsound.wav; sourceTree = "<group>"; };
+		55A616CB206C0D8700B2BAC8 /* Illuminati.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Illuminati.swift; sourceTree = "<group>"; };
+		55A616CD206C150A00B2BAC8 /* illuminati.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = illuminati.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,7 @@
 				552094942069C00D0057D6FF /* omae.wav */,
 				552094962069C0110057D6FF /* nani.wav */,
 				55A616C9206C0A1500B2BAC8 /* laserbeamsound.wav */,
+				55A616CD206C150A00B2BAC8 /* illuminati.wav */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -151,6 +156,7 @@
 				5520948C2069ABA10057D6FF /* WednesdayFrog.swift */,
 				552094922069B1430057D6FF /* Wall.swift */,
 				552094982069C1F50057D6FF /* Laser.swift */,
+				55A616CB206C0D8700B2BAC8 /* Illuminati.swift */,
 				5520948E2069AE330057D6FF /* PhysicsCategory.swift */,
 				552094902069AEBA0057D6FF /* GameData.swift */,
 			);
@@ -290,6 +296,7 @@
 				559D5CCE206723A20088B5FC /* Assets.xcassets in Resources */,
 				557819E7206822D80064C221 /* myDudes.wav in Resources */,
 				559D5CD1206723A20088B5FC /* LaunchScreen.storyboard in Resources */,
+				55A616CE206C150A00B2BAC8 /* illuminati.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +324,7 @@
 				559D5CF7206745A60088B5FC /* Player.swift in Sources */,
 				5520948F2069AE330057D6FF /* PhysicsCategory.swift in Sources */,
 				559D5CFB206749590088B5FC /* Helpers.swift in Sources */,
+				55A616CC206C0D8700B2BAC8 /* Illuminati.swift in Sources */,
 				552094992069C1F50057D6FF /* Laser.swift in Sources */,
 				559D5CC7206723A20088B5FC /* GameScene.swift in Sources */,
 				5520948D2069ABA10057D6FF /* WednesdayFrog.swift in Sources */,

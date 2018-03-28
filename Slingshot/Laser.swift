@@ -36,5 +36,4 @@ class Laser: SKSpriteNode {
             self.removeFromParent()
         })
     }
-    
 }

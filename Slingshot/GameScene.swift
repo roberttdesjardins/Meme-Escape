@@ -65,8 +65,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let shuffled = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: [1, 3, 5])
             obstacle3(order: shuffled as! [CGFloat])
         case 4:
-            //obstacle4()
-            print("Obstacle 4")
+            obstacle4()
         case 5:
             print("Obstacle 5")
         case 6:
@@ -89,7 +88,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         obs.initWall(position: CGPoint(x: size.width + obs.size.width/2, y: random(min: obs.size.height/2, max: size.height - obs.size.height/2)))
         worldNode.addChild(obs)
         
-        obs.moveSprite(location: CGPoint(x: -obs.size.width/2, y: obs.position.y), duration: random(min: CGFloat(2.0), max: CGFloat(3.0)))
+        obs.moveSprite(location: CGPoint(x: -obs.size.width/2, y: obs.position.y), duration: 2.2)
     }
     
     func obstacle2() {
@@ -189,6 +188,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         warning.run(SKAction.sequence([actionWait, actionWaitDone]))
     }
     
+    func obstacle4() {
+        let triangle = Illuminati(imageNamed: "Illuminati")
+        let randomXPos = size.width/2 + (size.width/2 + triangle.size.width/2) * CGFloat.randomSign
+        let randomYPos = size.height/2 + (size.height/2 + triangle.size.height/2) * CGFloat.randomSign
+        let randomPosition = CGPoint(x: randomXPos, y: randomYPos)
+        triangle.initTriangle(position: randomPosition)
+        triangle.rotateTriangle()
+        self.worldNode.addChild(triangle)
+        
+        let moveDuration = TimeInterval(10.0)
+        
+        triangle.moveForDuration(time: moveDuration)
+        playSoundFile(soundFile: "illuminati", duration: moveDuration)
+    }
+    
+    
     func touchDown(atPoint pos : CGPoint) {
         if let player = worldNode.childNode(withName: GameData.shared.kPlayerName) as? Player {
             startLabel.removeFromParent()
@@ -266,6 +281,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if startGame && CGFloat(dt) >= random(min: 4, max: 5) {
             self.lastUpdateTime = currentTime
             randomObstacle(obsticle: Int(arc4random_uniform(4) + 1))
+            //randomObstacle(obsticle: 4)
         }
     }
     
