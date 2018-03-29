@@ -6,11 +6,14 @@
 //  Copyright © 2018 Robert Desjardins. All rights reserved.
 //
 
+// TODO: Score not recording when die by hitting object and lifint finger at same time..
+
 import SpriteKit
 import GameplayKit
 import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    
     let worldNode = SKNode()
     
     private var startLabel: SKLabelNode! = nil
@@ -357,6 +360,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         default:
             print("AirHorn startPosition Default error")
         }
+        airHorn.createHornPhysicsBody()
+        let actionPlayAirhornSound = SKAction.run {
+            self.playSoundFile(soundFile: "Air Horn Sound Effect", duration: 3.0)
+        }
+        let actionRunSoundBlast = SKAction.run {
+            airHorn.texture = SKTexture(imageNamed: "airhornBlast")
+            airHorn.updateHornPhysicsBody()
+        }
+        airHorn.run(SKAction.sequence([SKAction.wait(forDuration: 2.0), actionPlayAirhornSound, actionRunSoundBlast]))
+        airHorn.run(SKAction.sequence([SKAction.wait(forDuration: 4.5), SKAction.removeFromParent()]))
         
     }
     
