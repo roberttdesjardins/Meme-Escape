@@ -16,6 +16,8 @@
 		552094992069C1F50057D6FF /* Laser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552094982069C1F50057D6FF /* Laser.swift */; };
 		557819E6206822D80064C221 /* wednesday.wav in Resources */ = {isa = PBXBuildFile; fileRef = 557819E4206822D80064C221 /* wednesday.wav */; };
 		557819E7206822D80064C221 /* myDudes.wav in Resources */ = {isa = PBXBuildFile; fileRef = 557819E5206822D80064C221 /* myDudes.wav */; };
+		559518E6206D83F900D35AA8 /* Knuckles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559518E5206D83F900D35AA8 /* Knuckles.swift */; };
+		559518E8206D86C600D35AA8 /* doyouknowdawae.wav in Resources */ = {isa = PBXBuildFile; fileRef = 559518E7206D86C600D35AA8 /* doyouknowdawae.wav */; };
 		559D5CC1206723A20088B5FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559D5CC0206723A20088B5FC /* AppDelegate.swift */; };
 		559D5CC7206723A20088B5FC /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559D5CC6206723A20088B5FC /* GameScene.swift */; };
 		559D5CC9206723A20088B5FC /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559D5CC8206723A20088B5FC /* GameViewController.swift */; };
@@ -69,6 +71,8 @@
 		552094982069C1F50057D6FF /* Laser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Laser.swift; sourceTree = "<group>"; };
 		557819E4206822D80064C221 /* wednesday.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wednesday.wav; sourceTree = "<group>"; };
 		557819E5206822D80064C221 /* myDudes.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = myDudes.wav; sourceTree = "<group>"; };
+		559518E5206D83F900D35AA8 /* Knuckles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Knuckles.swift; sourceTree = "<group>"; };
+		559518E7206D86C600D35AA8 /* doyouknowdawae.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = doyouknowdawae.wav; sourceTree = "<group>"; };
 		559D5CBD206723A20088B5FC /* Slingshot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Slingshot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		559D5CC0206723A20088B5FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		559D5CC6206723A20088B5FC /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -142,6 +146,7 @@
 				55A616DD206C235100B2BAC8 /* ohshit.wav */,
 				55A616E1206C30B900B2BAC8 /* donethis.wav */,
 				55A616E5206C42E300B2BAC8 /* Air Horn Sound Effect.wav */,
+				559518E7206D86C600D35AA8 /* doyouknowdawae.wav */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -179,16 +184,17 @@
 				559D5CCF206723A20088B5FC /* LaunchScreen.storyboard */,
 				559D5CD2206723A20088B5FC /* Info.plist */,
 				559D5CF6206745A60088B5FC /* Player.swift */,
-				559D5CFA206749590088B5FC /* Helpers.swift */,
-				5520948C2069ABA10057D6FF /* WednesdayFrog.swift */,
 				552094922069B1430057D6FF /* Wall.swift */,
+				5520948C2069ABA10057D6FF /* WednesdayFrog.swift */,
 				552094982069C1F50057D6FF /* Laser.swift */,
 				55A616CB206C0D8700B2BAC8 /* Illuminati.swift */,
 				55A616D1206C1F2800B2BAC8 /* HitMarker.swift */,
+				55A616E3206C36A800B2BAC8 /* AirHorn.swift */,
+				559518E5206D83F900D35AA8 /* Knuckles.swift */,
 				5520948E2069AE330057D6FF /* PhysicsCategory.swift */,
+				559D5CFA206749590088B5FC /* Helpers.swift */,
 				552094902069AEBA0057D6FF /* GameData.swift */,
 				55A616DF206C26F500B2BAC8 /* UserDefaultExt.swift */,
-				55A616E3206C36A800B2BAC8 /* AirHorn.swift */,
 			);
 			path = Slingshot;
 			sourceTree = "<group>";
@@ -319,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55A616DC206C232E00B2BAC8 /* losinghorn.wav in Resources */,
+				559518E8206D86C600D35AA8 /* doyouknowdawae.wav in Resources */,
 				552094952069C00D0057D6FF /* omae.wav in Resources */,
 				55A616D8206C20F500B2BAC8 /* triple.wav in Resources */,
 				559D5CCC206723A20088B5FC /* Main.storyboard in Resources */,
@@ -367,6 +374,7 @@
 				552094992069C1F50057D6FF /* Laser.swift in Sources */,
 				55A616D2206C1F2800B2BAC8 /* HitMarker.swift in Sources */,
 				559D5CC7206723A20088B5FC /* GameScene.swift in Sources */,
+				559518E6206D83F900D35AA8 /* Knuckles.swift in Sources */,
 				5520948D2069ABA10057D6FF /* WednesdayFrog.swift in Sources */,
 				559D5CC9206723A20088B5FC /* GameViewController.swift in Sources */,
 				559D5CF9206749040088B5FC /* GameOverScene.swift in Sources */,

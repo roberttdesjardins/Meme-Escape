@@ -11,6 +11,8 @@ import GameplayKit
 import CoreMotion
 import AVFoundation
 
+// TODO: If score is above a certain point, different sound effect - No one has ever done that, etc. 
+
 class GameOverScene: SKScene {
     
     var restartButton: SKSpriteNode! = nil

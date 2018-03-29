@@ -132,6 +132,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             obstacle5()
         case 6:
             obstacle6()
+        case 7:
+            obstacle7()
         default:
             print("Default Obstacle")
         }
@@ -366,13 +368,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         let actionRunSoundBlast = SKAction.run {
             airHorn.texture = SKTexture(imageNamed: "airhornBlast")
-            airHorn.updateHornPhysicsBody()
+            airHorn.updateHornPhysicsBodySoundWave()
         }
         airHorn.run(SKAction.sequence([SKAction.wait(forDuration: 2.0), actionPlayAirhornSound, actionRunSoundBlast]))
         airHorn.run(SKAction.sequence([SKAction.wait(forDuration: 4.5), SKAction.removeFromParent()]))
         
     }
     
+    func obstacle7() {
+        let timeBeforeKnuckles = 2.0
+        let randomX = size.width/2 + size.width/4 * CGFloat.randomSign
+        
+        createWarningArea(width: size.width/2, height: size.height, position: CGPoint(x: randomX, y: size.height/2), duration: timeBeforeKnuckles)
+        
+        let knuckles = Knuckles(imageNamed: "knuckles")
+        knuckles.initKnuckles()
+        knuckles.position = CGPoint(x: randomX, y: size.height + knuckles.size.height/2)
+        worldNode.addChild(knuckles)
+        knuckles.makeKnucklesRotate()
+        
+        let actionWait = SKAction.wait(forDuration: timeBeforeKnuckles)
+        let locationToMoveTo = knuckles.position - CGPoint(x: 0, y: size.height + knuckles.size.height)
+        
+        worldNode.run(SKAction.sequence([
+            actionWait,
+            SKAction.run {
+                self.playSoundFile(soundFile: "doyouknowdawae", duration: 1.5)
+                knuckles.moveSprite(location: locationToMoveTo, duration: 1.5)
+            }
+            ]))
+     
+    }
     
     func touchDown(atPoint pos : CGPoint) {
         if let player = worldNode.childNode(withName: GameData.shared.kPlayerName) as? Player {
@@ -444,7 +470,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             highScoreTable.removeFromParent()
             highScoreBackground.removeFromParent()
             createHud()
-            randomObstacle(obsticle: Int(arc4random_uniform(6) + 1))
+            randomObstacle(obsticle: Int(arc4random_uniform(7) + 1))
         }
         
         if startGame {
@@ -461,8 +487,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if startGame && CGFloat(dt) >= random(min: 4, max: 5) {
             self.lastUpdateTime = currentTime
-            //randomObstacle(obsticle: Int(arc4random_uniform(6) + 1))
-            randomObstacle(obsticle: 6)
+            //randomObstacle(obsticle: Int(arc4random_uniform(7) + 1))
+            randomObstacle(obsticle: 7)
         }
     }
     
