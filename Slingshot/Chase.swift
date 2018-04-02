@@ -23,6 +23,4 @@ class Chase: SKSpriteNode {
         self.physicsBody?.contactTestBitMask = PhysicsCategory.Player
         self.physicsBody?.collisionBitMask = PhysicsCategory.None
     }
-
-    
 }

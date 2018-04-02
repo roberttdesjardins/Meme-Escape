@@ -6,7 +6,7 @@
 //  Copyright © 2018 Robert Desjardins. All rights reserved.
 //
 
-// TODO: Chasing obstacle - RUN
+// TODO:
 // Hole in lasers
 // Delayed death omae wa
 // maze dungeon van darkholme
@@ -152,6 +152,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             obstacle7()
         case 8:
             obstacle8()
+        case 9:
+            obstacle9()
         default:
             print("Default Obstacle - shouldn't occur")
         }
@@ -449,25 +451,51 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             ]))
         
     }
-    
-    
+
     func processChaseMovement() {
         for chase in chaseArray {
             if let player = worldNode.childNode(withName: GameData.shared.kPlayerName) as? SKSpriteNode {
-                print("Gets to processChaseMovement player")
                 if player.position.x >= chase.position.x {
-                    chase.physicsBody?.velocity.dx = 100/414 * size.width
+                    chase.physicsBody?.velocity.dx = 150/414 * size.width
                 } else if player.position.x < chase.position.x {
-                    chase.physicsBody?.velocity.dx = -(100/414 * size.width)
+                    chase.physicsBody?.velocity.dx = -(150/414 * size.width)
                 }
                 
                 if player.position.y >= chase.position.y {
-                    chase.physicsBody?.velocity.dy = 100/414 * size.width
+                    chase.physicsBody?.velocity.dy = 150/414 * size.width
                 } else if player.position.y < chase.position.y {
-                    chase.physicsBody?.velocity.dy = -(100/414 * size.width)
+                    chase.physicsBody?.velocity.dy = -(150/414 * size.width)
                 }
             }
         }
+    }
+    
+    // Long cat goes up super long time, comes down other side
+    func obstacle9(){
+        let longcat = LongCat(imageNamed: "longcat")
+        longcat.initLongCat()
+        longcat.position = CGPoint(x: size.width * (5/6), y: -longcat.size.height/2)
+        worldNode.addChild(longcat)
+        
+        let longcat2 = LongCat(imageNamed: "longcat")
+        longcat2.initLongCat()
+        longcat2.zRotation = 180 * DegreesToRadians
+        longcat2.position = CGPoint(x: size.width * (1/6), y: size.height + longcat.size.height/2)
+        worldNode.addChild(longcat2)
+        
+        let actionLongCatMoveUp = SKAction.run {
+            longcat.moveLongCatUp()
+        }
+        let actionWait = SKAction.wait(forDuration: 5.0)
+        let actionLongCatMoveDown = SKAction.run {
+            longcat2.moveLongCatDown()
+        }
+        
+        worldNode.run(SKAction.sequence([
+            actionLongCatMoveUp,
+            actionWait,
+            actionLongCatMoveDown
+            ]))
     }
     
     func touchDown(atPoint pos : CGPoint) {
@@ -546,7 +574,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             highScoreTable.removeFromParent()
             highScoreBackground.removeFromParent()
             createHud()
-            randomObstacle(obsticle: Int(arc4random_uniform(8) + 1))
+            randomObstacle(obsticle: Int(arc4random_uniform(9) + 1))
         }
         
         if startGame {
@@ -563,8 +591,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if startGame && CGFloat(dt) >= random(min: 4, max: 5) {
             self.lastUpdateTime = currentTime
-            //randomObstacle(obsticle: Int(arc4random_uniform(8) + 1))
-            randomObstacle(obsticle: 8)
+            //randomObstacle(obsticle: Int(arc4random_uniform(9) + 1))
+            randomObstacle(obsticle: 9)
         }
         
         if !chaseArray.isEmpty {
