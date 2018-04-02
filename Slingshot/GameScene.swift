@@ -6,7 +6,21 @@
 //  Copyright © 2018 Robert Desjardins. All rights reserved.
 //
 
-// TODO: Score not recording when die by hitting object and lifint finger at same time..
+// TODO: Chasing obstacle - RUN
+// Hole in lasers
+// Delayed death omae wa
+// maze dungeon van darkholme
+// You just got pranked, projectile moves faster towards player
+// Dream- Projectiles change direction ever hesitation
+// Slap - How can she slap
+// YOU'RE TOO SLOW - SONICHU
+// Sonics the name, speeds my game
+// Move player sksprite towards finger really fast, so that you can create obstacles that prevent movement
+// Donald trump build wall for obstacle 1 or waifu body pillows
+// Oh shit, oh shit, oh shit
+// Long cat goes up super long time, comes down other side
+// Nothing personal kid, slash across screen, neckbeard in background - fedora?
+
 
 import SpriteKit
 import GameplayKit
@@ -20,12 +34,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var scoreLabel = SKLabelNode(fontNamed: "Avenir")
     private var lastUpdateTime : TimeInterval = 0
     private var startGame: Bool = false
+    private var gameOver: Bool = false
     private var counter: Int = 0
     private var highScoreTable = SKLabelNode(fontNamed: "Avenir")
     private var highScoreBackground: SKSpriteNode! = nil
     
     private var firstTimeStart = true
     
+    private var chaseArray: [SKSpriteNode] = []
     
     override func sceneDidLoad() {
         processGameData()
@@ -134,8 +150,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             obstacle6()
         case 7:
             obstacle7()
+        case 8:
+            obstacle8()
         default:
-            print("Default Obstacle")
+            print("Default Obstacle - shouldn't occur")
         }
     }
     
@@ -309,7 +327,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         hitMarker.run(SKAction.sequence([actionWait, actionWaitDone]))
     }
     
-    // creates an air horn which enters top, bottom, left, right or a corner of the screen and creates a soundwave which kills the player in that area accompanied by an airhorn blast sound
+    // Creates an air horn which enters top, bottom, left, right or a corner of the screen and creates a soundwave which kills the player in that area accompanied by an airhorn blast sound
     func obstacle6() {
         let airHorn = AirHorn(imageNamed: "airhorn")
         airHorn.initHorn()
@@ -375,6 +393,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    // Creates a warning area on one half of the screen, the drops a uganda knuckles from the top of that half of the screen accompanied by sound
     func obstacle7() {
         let timeBeforeKnuckles = 2.0
         let randomX = size.width/2 + size.width/4 * CGFloat.randomSign
@@ -397,7 +416,58 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 knuckles.moveSprite(location: locationToMoveTo, duration: 1.5)
             }
             ]))
-     
+    }
+    
+    // Chase player, run soundclip
+    func obstacle8(){
+        let chase = Chase(imageNamed: "chase")
+        chase.initChase()
+        chase.position = CGPoint(x: -chase.size.width, y: size.height/2)
+        worldNode.addChild(chase)
+        
+        let actionRunSound = SKAction.run {
+            self.playSoundFile(soundFile: "run", duration: 9.0)
+        }
+        let actionWait = SKAction.wait(forDuration: 1.5)
+        let actionMoveChase = SKAction.run {
+            self.chaseArray.append(chase)
+        }
+        let actionMoveDone = SKAction.sequence([
+            SKAction.wait(forDuration: 7.5),
+            SKAction.run {
+                self.chaseArray.removeFirst()
+                chase.removeFromParent()
+            }
+            ])
+
+        
+        worldNode.run(SKAction.sequence([
+            actionRunSound,
+            actionWait,
+            actionMoveChase,
+            actionMoveDone
+            ]))
+        
+    }
+    
+    
+    func processChaseMovement() {
+        for chase in chaseArray {
+            if let player = worldNode.childNode(withName: GameData.shared.kPlayerName) as? SKSpriteNode {
+                print("Gets to processChaseMovement player")
+                if player.position.x >= chase.position.x {
+                    chase.physicsBody?.velocity.dx = 100/414 * size.width
+                } else if player.position.x < chase.position.x {
+                    chase.physicsBody?.velocity.dx = -(100/414 * size.width)
+                }
+                
+                if player.position.y >= chase.position.y {
+                    chase.physicsBody?.velocity.dy = 100/414 * size.width
+                } else if player.position.y < chase.position.y {
+                    chase.physicsBody?.velocity.dy = -(100/414 * size.width)
+                }
+            }
+        }
     }
     
     func touchDown(atPoint pos : CGPoint) {
@@ -415,7 +485,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func touchUp(atPoint pos : CGPoint) {
         // Game ends when player lifts finger up
-        gameOverSceneLoad(view: view!)
+        if !gameOver {
+            gameOverSceneLoad(view: view!)
+        }
+        gameOver = true
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -447,7 +520,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // Called when there is a collision between two nodes.
     func collisionBetween(ob1: SKNode, ob2: SKNode){
         if ob1.name == GameData.shared.kPlayerName && ob2.name == GameData.shared.kObstacleName {
-            gameOverSceneLoad(view: view!)
+            if !gameOver {
+                gameOverSceneLoad(view: view!)
+            }
+            gameOver = true
         }
     }
     
@@ -470,7 +546,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             highScoreTable.removeFromParent()
             highScoreBackground.removeFromParent()
             createHud()
-            randomObstacle(obsticle: Int(arc4random_uniform(7) + 1))
+            randomObstacle(obsticle: Int(arc4random_uniform(8) + 1))
         }
         
         if startGame {
@@ -487,9 +563,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if startGame && CGFloat(dt) >= random(min: 4, max: 5) {
             self.lastUpdateTime = currentTime
-            //randomObstacle(obsticle: Int(arc4random_uniform(7) + 1))
-            randomObstacle(obsticle: 7)
+            //randomObstacle(obsticle: Int(arc4random_uniform(8) + 1))
+            randomObstacle(obsticle: 8)
         }
+        
+        if !chaseArray.isEmpty {
+            processChaseMovement()
+        }
+        
     }
     
     func playSoundFile(soundFile: String, duration: TimeInterval) {

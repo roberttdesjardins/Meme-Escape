@@ -11,7 +11,7 @@ import GameplayKit
 import CoreMotion
 import AVFoundation
 
-// TODO: If score is above a certain point, different sound effect - No one has ever done that, etc. 
+// TODO: If score is above a certain point, different sound effect - No one has ever done that, noice, ...wow etc.
 
 class GameOverScene: SKScene {
     
@@ -76,7 +76,6 @@ class GameOverScene: SKScene {
         } catch {
             print("Couldn't play losing sound")
         }
-
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
