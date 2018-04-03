@@ -11,15 +11,13 @@
 // Delayed death omae wa
 // maze dungeon van darkholme
 // You just got pranked, projectile moves faster towards player
-// Dream- Projectiles change direction ever hesitation
+// Dream- Projectiles change direction every hesitation
 // Slap - How can she slap
 // YOU'RE TOO SLOW - SONICHU
 // Sonics the name, speeds my game
 // Move player sksprite towards finger really fast, so that you can create obstacles that prevent movement
 // Donald trump build wall for obstacle 1 or waifu body pillows
 // Oh shit, oh shit, oh shit
-// Long cat goes up super long time, comes down other side
-// Nothing personal kid, slash across screen, neckbeard in background - fedora?
 
 
 import SpriteKit
@@ -154,6 +152,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             obstacle8()
         case 9:
             obstacle9()
+        case 10:
+            obstacle10()
         default:
             print("Default Obstacle - shouldn't occur")
         }
@@ -421,6 +421,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     // Chase player, run soundclip
+    // TODO: Change rotation of chase
     func obstacle8(){
         let chase = Chase(imageNamed: "chase")
         chase.initChase()
@@ -495,6 +496,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             actionLongCatMoveUp,
             actionWait,
             actionLongCatMoveDown
+            ]))
+    }
+    
+    // Nothing personal kid, slash across screen, neckbeard in background - fedora?
+    // TODO: Added nothing personnel kid sound, add slash or fedora slash effect and sound
+    func obstacle10() {
+        let neckBeard = SKSpriteNode(imageNamed: "neckBeard")
+        neckBeard.name = GameData.shared.kObstacleName
+        let neckBeardWidth = GameData.shared.deviceWidth
+        let neckBeardHeight = neckBeardWidth
+        neckBeard.size = CGSize(width: neckBeardWidth, height: neckBeardHeight)
+        neckBeard.zPosition = 1
+        neckBeard.position = CGPoint(x: size.width/2, y: -neckBeardHeight)
+        
+        worldNode.addChild(neckBeard)
+        
+        let actionMove = SKAction.move(to: CGPoint(x: neckBeard.position.x, y: neckBeard.size.height/2), duration: 1.5)
+        let actionWait = SKAction.wait(forDuration: 4.5)
+        let actionWaitDone = SKAction.removeFromParent()
+        
+        neckBeard.run(SKAction.sequence([
+            actionMove,
+            actionWait,
+            actionWaitDone
             ]))
     }
     
@@ -574,7 +599,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             highScoreTable.removeFromParent()
             highScoreBackground.removeFromParent()
             createHud()
-            randomObstacle(obsticle: Int(arc4random_uniform(9) + 1))
+            randomObstacle(obsticle: Int(arc4random_uniform(10) + 1))
         }
         
         if startGame {
@@ -591,8 +616,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if startGame && CGFloat(dt) >= random(min: 4, max: 5) {
             self.lastUpdateTime = currentTime
-            //randomObstacle(obsticle: Int(arc4random_uniform(9) + 1))
-            randomObstacle(obsticle: 9)
+            //randomObstacle(obsticle: Int(arc4random_uniform(10) + 1))
+            randomObstacle(obsticle: 10)
         }
         
         if !chaseArray.isEmpty {
