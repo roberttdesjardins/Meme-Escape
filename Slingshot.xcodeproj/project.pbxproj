@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		550DAECB207563C100C981A4 /* personnel.wav in Resources */ = {isa = PBXBuildFile; fileRef = 550DAECA207563C100C981A4 /* personnel.wav */; };
+		550DAECD207565E900C981A4 /* SWBlade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550DAECC207565E900C981A4 /* SWBlade.swift */; };
+		550DAECF20756D2400C981A4 /* Air Horn Sound Effect.wav in Resources */ = {isa = PBXBuildFile; fileRef = 550DAECE20756D2400C981A4 /* Air Horn Sound Effect.wav */; };
 		5520948D2069ABA10057D6FF /* WednesdayFrog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5520948C2069ABA10057D6FF /* WednesdayFrog.swift */; };
 		5520948F2069AE330057D6FF /* PhysicsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5520948E2069AE330057D6FF /* PhysicsCategory.swift */; };
 		552094912069AEBA0057D6FF /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552094902069AEBA0057D6FF /* GameData.swift */; };
@@ -44,7 +47,6 @@
 		55A616E0206C26F500B2BAC8 /* UserDefaultExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A616DF206C26F500B2BAC8 /* UserDefaultExt.swift */; };
 		55A616E2206C30B900B2BAC8 /* donethis.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55A616E1206C30B900B2BAC8 /* donethis.wav */; };
 		55A616E4206C36A800B2BAC8 /* AirHorn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A616E3206C36A800B2BAC8 /* AirHorn.swift */; };
-		55A616E6206C42E300B2BAC8 /* Air Horn Sound Effect.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55A616E5206C42E300B2BAC8 /* Air Horn Sound Effect.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		550DAECA207563C100C981A4 /* personnel.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = personnel.wav; sourceTree = "<group>"; };
+		550DAECC207565E900C981A4 /* SWBlade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWBlade.swift; sourceTree = "<group>"; };
+		550DAECE20756D2400C981A4 /* Air Horn Sound Effect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Air Horn Sound Effect.wav"; sourceTree = "<group>"; };
 		5520948C2069ABA10057D6FF /* WednesdayFrog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WednesdayFrog.swift; sourceTree = "<group>"; };
 		5520948E2069AE330057D6FF /* PhysicsCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsCategory.swift; sourceTree = "<group>"; };
 		552094902069AEBA0057D6FF /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
@@ -108,7 +113,6 @@
 		55A616DF206C26F500B2BAC8 /* UserDefaultExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultExt.swift; sourceTree = "<group>"; };
 		55A616E1206C30B900B2BAC8 /* donethis.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = donethis.wav; sourceTree = "<group>"; };
 		55A616E3206C36A800B2BAC8 /* AirHorn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirHorn.swift; sourceTree = "<group>"; };
-		55A616E5206C42E300B2BAC8 /* Air Horn Sound Effect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Air Horn Sound Effect.wav"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,9 +155,10 @@
 				55A616DB206C232E00B2BAC8 /* losinghorn.wav */,
 				55A616DD206C235100B2BAC8 /* ohshit.wav */,
 				55A616E1206C30B900B2BAC8 /* donethis.wav */,
-				55A616E5206C42E300B2BAC8 /* Air Horn Sound Effect.wav */,
 				559518E7206D86C600D35AA8 /* doyouknowdawae.wav */,
 				558253582072ED7D007E8BBF /* run.wav */,
+				550DAECA207563C100C981A4 /* personnel.wav */,
+				550DAECE20756D2400C981A4 /* Air Horn Sound Effect.wav */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -200,6 +205,7 @@
 				559518E5206D83F900D35AA8 /* Knuckles.swift */,
 				558253562072DDF6007E8BBF /* Chase.swift */,
 				5582535A2072F2F8007E8BBF /* LongCat.swift */,
+				550DAECC207565E900C981A4 /* SWBlade.swift */,
 				5520948E2069AE330057D6FF /* PhysicsCategory.swift */,
 				559D5CFA206749590088B5FC /* Helpers.swift */,
 				552094902069AEBA0057D6FF /* GameData.swift */,
@@ -342,14 +348,15 @@
 				552094972069C0110057D6FF /* nani.wav in Resources */,
 				55A616CA206C0A1500B2BAC8 /* laserbeamsound.wav in Resources */,
 				557819E6206822D80064C221 /* wednesday.wav in Resources */,
+				550DAECF20756D2400C981A4 /* Air Horn Sound Effect.wav in Resources */,
 				55A616E2206C30B900B2BAC8 /* donethis.wav in Resources */,
 				559D5CCE206723A20088B5FC /* Assets.xcassets in Resources */,
 				55A616D6206C201D00B2BAC8 /* hitmarker.wav in Resources */,
+				550DAECB207563C100C981A4 /* personnel.wav in Resources */,
 				55A616DE206C235100B2BAC8 /* ohshit.wav in Resources */,
 				55A616DA206C232700B2BAC8 /* pranked.wav in Resources */,
 				557819E7206822D80064C221 /* myDudes.wav in Resources */,
 				559D5CD1206723A20088B5FC /* LaunchScreen.storyboard in Resources */,
-				55A616E6206C42E300B2BAC8 /* Air Horn Sound Effect.wav in Resources */,
 				55A616CE206C150A00B2BAC8 /* illuminati.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,6 +382,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				550DAECD207565E900C981A4 /* SWBlade.swift in Sources */,
 				55A616E4206C36A800B2BAC8 /* AirHorn.swift in Sources */,
 				558253572072DDF6007E8BBF /* Chase.swift in Sources */,
 				559D5CF7206745A60088B5FC /* Player.swift in Sources */,

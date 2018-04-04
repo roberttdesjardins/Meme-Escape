@@ -26,6 +26,9 @@ import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    // This optional variable will help you to easily access the blade
+    var blade: SWBlade?
+    
     let worldNode = SKNode()
     
     private var startLabel: SKLabelNode! = nil
@@ -421,22 +424,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     // Chase player, run soundclip
-    // TODO: Change rotation of chase
     func obstacle8(){
         let chase = Chase(imageNamed: "chase")
         chase.initChase()
         chase.position = CGPoint(x: -chase.size.width, y: size.height/2)
         worldNode.addChild(chase)
         
+        if let player = worldNode.childNode(withName: GameData.shared.kPlayerName) as? SKSpriteNode {
+            let lookAtConstraint = SKConstraint.orient(to: player, offset: SKRange(constantValue: 0))
+            chase.constraints = [ lookAtConstraint ]
+        }
+       
+        
         let actionRunSound = SKAction.run {
-            self.playSoundFile(soundFile: "run", duration: 9.0)
+            self.playSoundFile(soundFile: "run", duration: 11.5)
         }
         let actionWait = SKAction.wait(forDuration: 1.5)
         let actionMoveChase = SKAction.run {
             self.chaseArray.append(chase)
         }
         let actionMoveDone = SKAction.sequence([
-            SKAction.wait(forDuration: 7.5),
+            SKAction.wait(forDuration: 10.0),
             SKAction.run {
                 self.chaseArray.removeFirst()
                 chase.removeFromParent()
@@ -456,22 +464,48 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func processChaseMovement() {
         for chase in chaseArray {
             if let player = worldNode.childNode(withName: GameData.shared.kPlayerName) as? SKSpriteNode {
+                let xVelo = (chase.physicsBody?.velocity.dx)!
+                let yVelo = (chase.physicsBody?.velocity.dy)!
                 if player.position.x >= chase.position.x {
-                    chase.physicsBody?.velocity.dx = 150/414 * size.width
+                    if xVelo < CGFloat(0) {
+                        chase.physicsBody?.applyForce(CGVector(dx: 40/414 * size.width - (xVelo / 4), dy: 0))
+                    } else {
+                        chase.physicsBody?.applyForce(CGVector(dx: 40/414 * size.width, dy: 0))
+                    }
+                    
+                    //chase.physicsBody?.velocity.dx = 150/414 * size.width
                 } else if player.position.x < chase.position.x {
-                    chase.physicsBody?.velocity.dx = -(150/414 * size.width)
+                    if xVelo > CGFloat(0) {
+                        chase.physicsBody?.applyForce(CGVector(dx: -40/414 * size.width - (xVelo / 4), dy: 0))
+                    } else {
+                        chase.physicsBody?.applyForce(CGVector(dx: 40/414 * size.width * -1, dy: 0))
+                    }
+
+                    //chase.physicsBody?.velocity.dx = -(150/414 * size.width)
                 }
                 
                 if player.position.y >= chase.position.y {
-                    chase.physicsBody?.velocity.dy = 150/414 * size.width
+                    if yVelo < CGFloat(0) {
+                        chase.physicsBody?.applyForce(CGVector(dx: 0, dy: 40/414 * size.width - (yVelo / 4)))
+                    } else {
+                        chase.physicsBody?.applyForce(CGVector(dx: 0, dy: 40/414 * size.width))
+                    }
+                    //chase.physicsBody?.velocity.dy = 150/414 * size.width
+                    
                 } else if player.position.y < chase.position.y {
-                    chase.physicsBody?.velocity.dy = -(150/414 * size.width)
+                    if yVelo > CGFloat(0) {
+                        chase.physicsBody?.applyForce(CGVector(dx: 0, dy: -1 * 40/414 * size.width - (yVelo / 4)))
+                    } else {
+                        chase.physicsBody?.applyForce(CGVector(dx: 0, dy: -1 * 40/414 * size.width))
+                    }
+                    //chase.physicsBody?.velocity.dy = -(150/414 * size.width)
                 }
             }
         }
     }
     
     // Long cat goes up super long time, comes down other side
+    // TODO: Add feet, add sound
     func obstacle9(){
         let longcat = LongCat(imageNamed: "longcat")
         longcat.initLongCat()
@@ -500,7 +534,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     // Nothing personal kid, slash across screen, neckbeard in background - fedora?
-    // TODO: Added nothing personnel kid sound, add slash or fedora slash effect and sound
     func obstacle10() {
         let neckBeard = SKSpriteNode(imageNamed: "neckBeard")
         neckBeard.name = GameData.shared.kObstacleName
@@ -513,14 +546,51 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         worldNode.addChild(neckBeard)
         
         let actionMove = SKAction.move(to: CGPoint(x: neckBeard.position.x, y: neckBeard.size.height/2), duration: 1.5)
-        let actionWait = SKAction.wait(forDuration: 4.5)
+        let actionWait1 = SKAction.wait(forDuration: 3.0)
+        let actionWait2 = SKAction.wait(forDuration: 1.5)
+        let actionPlaySound = SKAction.run {
+            self.playSoundFile(soundFile: "personnel", duration: 3.0)
+        }
+        let actionPlaySlash = SKAction.run {
+            let randomStartPosition = CGPoint(x: -self.size.width * (1/10), y: random(min: 0, max: self.size.height))
+            let randomFinishPosition = CGPoint(x: self.size.width * (11/10), y: random(min: 0, max: self.size.height))
+            self.createSlash(start: randomStartPosition, finish: randomFinishPosition)
+        }
         let actionWaitDone = SKAction.removeFromParent()
         
         neckBeard.run(SKAction.sequence([
             actionMove,
-            actionWait,
+            actionPlaySound,
+            actionWait1,
+            actionPlaySlash,
+            actionWait2,
             actionWaitDone
             ]))
+    }
+    
+    func createSlash(start: CGPoint, finish: CGPoint){
+        presentBladeAtPosition(start)
+        let actionMove = SKAction.move(to: finish, duration: TimeInterval(0.2))
+        let actionWait = SKAction.wait(forDuration: 1.0)
+        let actionMoveDone = SKAction.removeFromParent()
+        guard let blade = blade else {
+            fatalError("Blade could not be created")
+        }
+        blade.run(SKAction.sequence([actionMove, actionWait, actionMoveDone]))
+    }
+    
+    func presentBladeAtPosition(_ position:CGPoint) {
+        blade = SWBlade(position: position, target: self, color: .white)
+        
+        guard let blade = blade else {
+            fatalError("Blade could not be created")
+        }
+        blade.enablePhysics()
+        worldNode.addChild(blade)
+    }
+    
+    func removeBlade() {
+        blade!.removeFromParent()
     }
     
     func touchDown(atPoint pos : CGPoint) {
@@ -617,7 +687,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if startGame && CGFloat(dt) >= random(min: 4, max: 5) {
             self.lastUpdateTime = currentTime
             //randomObstacle(obsticle: Int(arc4random_uniform(10) + 1))
-            randomObstacle(obsticle: 10)
+            randomObstacle(obsticle: 8)
         }
         
         if !chaseArray.isEmpty {
