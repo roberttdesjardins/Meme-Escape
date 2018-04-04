@@ -10,6 +10,7 @@
 		550DAECB207563C100C981A4 /* personnel.wav in Resources */ = {isa = PBXBuildFile; fileRef = 550DAECA207563C100C981A4 /* personnel.wav */; };
 		550DAECD207565E900C981A4 /* SWBlade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550DAECC207565E900C981A4 /* SWBlade.swift */; };
 		550DAECF20756D2400C981A4 /* Air Horn Sound Effect.wav in Resources */ = {isa = PBXBuildFile; fileRef = 550DAECE20756D2400C981A4 /* Air Horn Sound Effect.wav */; };
+		550DAED12075725000C981A4 /* wall.wav in Resources */ = {isa = PBXBuildFile; fileRef = 550DAED02075725000C981A4 /* wall.wav */; };
 		5520948D2069ABA10057D6FF /* WednesdayFrog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5520948C2069ABA10057D6FF /* WednesdayFrog.swift */; };
 		5520948F2069AE330057D6FF /* PhysicsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5520948E2069AE330057D6FF /* PhysicsCategory.swift */; };
 		552094912069AEBA0057D6FF /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552094902069AEBA0057D6FF /* GameData.swift */; };
@@ -70,6 +71,7 @@
 		550DAECA207563C100C981A4 /* personnel.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = personnel.wav; sourceTree = "<group>"; };
 		550DAECC207565E900C981A4 /* SWBlade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWBlade.swift; sourceTree = "<group>"; };
 		550DAECE20756D2400C981A4 /* Air Horn Sound Effect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Air Horn Sound Effect.wav"; sourceTree = "<group>"; };
+		550DAED02075725000C981A4 /* wall.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wall.wav; sourceTree = "<group>"; };
 		5520948C2069ABA10057D6FF /* WednesdayFrog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WednesdayFrog.swift; sourceTree = "<group>"; };
 		5520948E2069AE330057D6FF /* PhysicsCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsCategory.swift; sourceTree = "<group>"; };
 		552094902069AEBA0057D6FF /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				558253582072ED7D007E8BBF /* run.wav */,
 				550DAECA207563C100C981A4 /* personnel.wav */,
 				550DAECE20756D2400C981A4 /* Air Horn Sound Effect.wav */,
+				550DAED02075725000C981A4 /* wall.wav */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				550DAED12075725000C981A4 /* wall.wav in Resources */,
 				558253592072ED7D007E8BBF /* run.wav in Resources */,
 				55A616DC206C232E00B2BAC8 /* losinghorn.wav in Resources */,
 				559518E8206D86C600D35AA8 /* doyouknowdawae.wav in Resources */,

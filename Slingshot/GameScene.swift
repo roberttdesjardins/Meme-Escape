@@ -25,8 +25,6 @@ import GameplayKit
 import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    
-    // This optional variable will help you to easily access the blade
     var blade: SWBlade?
     
     let worldNode = SKNode()
@@ -166,6 +164,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // Creates a sequence of walls moving from the left or right of the screen
     func obstacle1() {
         let wallDirection = ["Left", "Right"].randomItem()
+        
+        playSoundFile(soundFile: "wall", duration: 5.0)
         
         worldNode.run(SKAction.repeat(SKAction.sequence([
             SKAction.run {
@@ -686,8 +686,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if startGame && CGFloat(dt) >= random(min: 4, max: 5) {
             self.lastUpdateTime = currentTime
-            //randomObstacle(obsticle: Int(arc4random_uniform(10) + 1))
-            randomObstacle(obsticle: 8)
+            randomObstacle(obsticle: Int(arc4random_uniform(10) + 1))
+            //randomObstacle(obsticle: 8)
         }
         
         if !chaseArray.isEmpty {
