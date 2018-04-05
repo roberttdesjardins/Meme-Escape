@@ -13,7 +13,7 @@ import GameplayKit
 class LongCat: SKSpriteNode {
     func initLongCat() {
         self.name = GameData.shared.kObstacleName
-        let longCatWidth = GameData.shared.deviceWidth * (1/5)
+        let longCatWidth = GameData.shared.deviceWidth * (1/4)
         let longCatHeight = longCatWidth * 4.6296296296
         self.size = CGSize(width: longCatWidth, height: longCatHeight)
         self.zPosition = 2
@@ -27,7 +27,7 @@ class LongCat: SKSpriteNode {
     
     func moveLongCatUp() {
         let actionMove1 = SKAction.move(to: CGPoint(x: self.position.x, y: GameData.shared.deviceHeight/2), duration: TimeInterval(1.5))
-        let actionWait = SKAction.wait(forDuration: 2.0)
+        let actionWait = SKAction.wait(forDuration: 4.0)
         let actionMove2 = SKAction.move(to: CGPoint(x: self.position.x, y: GameData.shared.deviceHeight + self.size.height/2), duration: TimeInterval(1.5))
         let actionMoveDone = SKAction.removeFromParent()
         run(SKAction.sequence([actionMove1, actionWait, actionMove2, actionMoveDone]))
@@ -35,7 +35,7 @@ class LongCat: SKSpriteNode {
     
     func moveLongCatDown() {
         let actionMove1 = SKAction.move(to: CGPoint(x: self.position.x, y: GameData.shared.deviceHeight/2), duration: TimeInterval(1.5))
-        let actionWait = SKAction.wait(forDuration: 2.0)
+        let actionWait = SKAction.wait(forDuration: 4.0)
         let actionMove2 = SKAction.move(to: CGPoint(x: self.position.x, y:  -self.size.height/2), duration: TimeInterval(1.5))
         let actionMoveDone = SKAction.removeFromParent()
         run(SKAction.sequence([actionMove1, actionWait, actionMove2, actionMoveDone]))

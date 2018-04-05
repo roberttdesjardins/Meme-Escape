@@ -48,6 +48,7 @@
 		55A616E0206C26F500B2BAC8 /* UserDefaultExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A616DF206C26F500B2BAC8 /* UserDefaultExt.swift */; };
 		55A616E2206C30B900B2BAC8 /* donethis.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55A616E1206C30B900B2BAC8 /* donethis.wav */; };
 		55A616E4206C36A800B2BAC8 /* AirHorn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A616E3206C36A800B2BAC8 /* AirHorn.swift */; };
+		55F51E6E2076CF4A000CDF6E /* slash.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55F51E6D2076CF4A000CDF6E /* slash.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 		55A616DF206C26F500B2BAC8 /* UserDefaultExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultExt.swift; sourceTree = "<group>"; };
 		55A616E1206C30B900B2BAC8 /* donethis.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = donethis.wav; sourceTree = "<group>"; };
 		55A616E3206C36A800B2BAC8 /* AirHorn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirHorn.swift; sourceTree = "<group>"; };
+		55F51E6D2076CF4A000CDF6E /* slash.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = slash.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 				550DAECA207563C100C981A4 /* personnel.wav */,
 				550DAECE20756D2400C981A4 /* Air Horn Sound Effect.wav */,
 				550DAED02075725000C981A4 /* wall.wav */,
+				55F51E6D2076CF4A000CDF6E /* slash.wav */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -298,7 +301,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Robert Desjardins";
 				TargetAttributes = {
 					559D5CBC206723A20088B5FC = {
@@ -358,6 +361,7 @@
 				55A616D6206C201D00B2BAC8 /* hitmarker.wav in Resources */,
 				550DAECB207563C100C981A4 /* personnel.wav in Resources */,
 				55A616DE206C235100B2BAC8 /* ohshit.wav in Resources */,
+				55F51E6E2076CF4A000CDF6E /* slash.wav in Resources */,
 				55A616DA206C232700B2BAC8 /* pranked.wav in Resources */,
 				557819E7206822D80064C221 /* myDudes.wav in Resources */,
 				559D5CD1206723A20088B5FC /* LaunchScreen.storyboard in Resources */,
@@ -473,6 +477,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -480,6 +485,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -510,6 +516,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "Escape from Meme";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -530,6 +537,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -537,6 +545,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -560,6 +569,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "Escape from Meme";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -574,7 +584,7 @@
 				DEVELOPMENT_TEAM = H2XMQZ2827;
 				INFOPLIST_FILE = Slingshot/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Robert-Desjardins.Slingshot";
+				PRODUCT_BUNDLE_IDENTIFIER = "Robert-Desjardins.Escape-from-Meme";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -589,7 +599,7 @@
 				DEVELOPMENT_TEAM = H2XMQZ2827;
 				INFOPLIST_FILE = Slingshot/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Robert-Desjardins.Slingshot";
+				PRODUCT_BUNDLE_IDENTIFIER = "Robert-Desjardins.Escape-from-Meme";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

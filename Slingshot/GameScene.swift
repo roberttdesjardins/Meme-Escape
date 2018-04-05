@@ -7,16 +7,16 @@
 //
 
 // TODO:
-// Hole in lasers
+// Hole in lasers?
 // Delayed death omae wa
 // maze dungeon van darkholme
 // You just got pranked, projectile moves faster towards player
 // Dream- Projectiles change direction every hesitation
-// Slap - How can she slap
-// YOU'RE TOO SLOW - SONICHU
+// Slap - How can she slap - multiple slaps
+// YOU'RE TOO SLOW - Sonichu
 // Sonics the name, speeds my game
-// Move player sksprite towards finger really fast, so that you can create obstacles that prevent movement
-// Donald trump build wall for obstacle 1 or waifu body pillows
+// Move player sksprite towards finger really fast, so that you can create obstacles that prevent movement?
+// Waifu body pillows
 // Oh shit, oh shit, oh shit
 
 
@@ -425,7 +425,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // Chase player, run soundclip
     func obstacle8(){
-        let chase = Chase(imageNamed: "chase")
+        let randomNumber = arc4random_uniform(6) + 1
+        let randomEmoji = "emoji" + String(randomNumber)
+        
+        let chase = Chase(imageNamed: randomEmoji)
         chase.initChase()
         chase.position = CGPoint(x: -chase.size.width, y: size.height/2)
         worldNode.addChild(chase)
@@ -521,7 +524,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let actionLongCatMoveUp = SKAction.run {
             longcat.moveLongCatUp()
         }
-        let actionWait = SKAction.wait(forDuration: 5.0)
+        let actionWait = SKAction.wait(forDuration: 7.0)
         let actionLongCatMoveDown = SKAction.run {
             longcat2.moveLongCatDown()
         }
@@ -552,7 +555,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.playSoundFile(soundFile: "personnel", duration: 3.0)
         }
         let actionPlaySlash = SKAction.run {
-            let randomStartPosition = CGPoint(x: -self.size.width * (1/10), y: random(min: 0, max: self.size.height))
+            self.playSoundFile(soundFile: "slash", duration: 1.0)
+            let startPosition = -self.size.width - 50
+            let randomStartPosition = CGPoint(x: startPosition, y: random(min: 0, max: self.size.height))
             let randomFinishPosition = CGPoint(x: self.size.width * (11/10), y: random(min: 0, max: self.size.height))
             self.createSlash(start: randomStartPosition, finish: randomFinishPosition)
         }
@@ -684,10 +689,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Calculate time since last update
         let dt = currentTime - self.lastUpdateTime
         
-        if startGame && CGFloat(dt) >= random(min: 4, max: 5) {
+        if startGame && CGFloat(dt) >= random(min: 4, max: 7) {
             self.lastUpdateTime = currentTime
             randomObstacle(obsticle: Int(arc4random_uniform(10) + 1))
-            //randomObstacle(obsticle: 8)
+            //randomObstacle(obsticle: 10)
         }
         
         if !chaseArray.isEmpty {

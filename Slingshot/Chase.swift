@@ -13,8 +13,8 @@ import GameplayKit
 class Chase: SKSpriteNode {
     func initChase() {
         self.name = GameData.shared.kObstacleName
-        let chaseWidth = GameData.shared.deviceWidth * (1/10)
-        let chaseHeight = chaseWidth * (8/6)
+        let chaseWidth = GameData.shared.deviceWidth * (1/9)
+        let chaseHeight = chaseWidth
         self.size = CGSize(width: chaseWidth, height: chaseHeight)
         self.zPosition = 2
         
