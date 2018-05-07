@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Slingshot.xcodeproj">
+      location = "self:/Users/robd/Dropbox/Personal Programming/IOS Apps/Slingshot/Meme Escape.xcodeproj">
    </FileRef>
 </Workspace>

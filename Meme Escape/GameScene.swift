@@ -398,27 +398,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    // Creates a warning area on one half of the screen, the drops a uganda knuckles from the top of that half of the screen accompanied by sound
+    // Creates a warning area on one half of the screen, the drops a Doge from the top of that half of the screen accompanied by sound
     func obstacle7() {
-        let timeBeforeKnuckles = 2.0
+        let timeBeforeDoge = 2.0
         let randomX = size.width/2 + size.width/4 * CGFloat.randomSign
         
-        createWarningArea(width: size.width/2, height: size.height, position: CGPoint(x: randomX, y: size.height/2), duration: timeBeforeKnuckles)
+        createWarningArea(width: size.width/2, height: size.height, position: CGPoint(x: randomX, y: size.height/2), duration: timeBeforeDoge)
         
-        let knuckles = Knuckles(imageNamed: "knuckles")
-        knuckles.initKnuckles()
-        knuckles.position = CGPoint(x: randomX, y: size.height + knuckles.size.height/2)
-        worldNode.addChild(knuckles)
-        knuckles.makeKnucklesRotate()
+        let doge = Doge(imageNamed: "doge")
+        doge.initDoge()
+        doge.position = CGPoint(x: randomX, y: size.height + doge.size.height)
+        worldNode.addChild(doge)
+        doge.makeDogeRotate()
         
-        let actionWait = SKAction.wait(forDuration: timeBeforeKnuckles)
-        let locationToMoveTo = knuckles.position - CGPoint(x: 0, y: size.height + knuckles.size.height)
+        let actionWait = SKAction.wait(forDuration: timeBeforeDoge)
+        let locationToMoveTo = doge.position - CGPoint(x: 0, y: size.height + (doge.size.height * 2))
         
         worldNode.run(SKAction.sequence([
             actionWait,
             SKAction.run {
-                self.playSoundFile(soundFile: "doyouknowdawae", duration: 1.5)
-                knuckles.moveSprite(location: locationToMoveTo, duration: 1.5)
+                self.playSoundFile(soundFile: "wow", duration: 1.5)
+                doge.moveSprite(location: locationToMoveTo, duration: 1.5)
             }
             ]))
     }

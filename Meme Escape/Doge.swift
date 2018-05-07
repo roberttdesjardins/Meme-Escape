@@ -10,8 +10,8 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-class Knuckles: SKSpriteNode {
-    func initKnuckles() {
+class Doge: SKSpriteNode {
+    func initDoge() {
         self.name = GameData.shared.kObstacleName
         self.size = CGSize(width: GameData.shared.deviceWidth * (1/2), height: GameData.shared.deviceWidth * (1/2))
         self.zPosition = 2
@@ -23,7 +23,7 @@ class Knuckles: SKSpriteNode {
         self.physicsBody?.collisionBitMask = PhysicsCategory.None
     }
     
-    func makeKnucklesRotate() {
+    func makeDogeRotate() {
         let oneRevolution:SKAction = SKAction.rotate(byAngle: CGFloat.pi * 2 * CGFloat.randomSign, duration: TimeInterval(random(min: 0.5, max: 1.0)))
         let repeatRotation:SKAction = SKAction.repeatForever(oneRevolution)
         
